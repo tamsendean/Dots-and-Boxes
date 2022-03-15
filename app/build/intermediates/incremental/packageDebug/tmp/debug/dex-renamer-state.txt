@@ -1,0 +1,4 @@
+#Tue Mar 15 13:13:00 PDT 2022
+base.0=/Users/tamsendean/AndroidStudioProjects/PigGameStarter/app/build/intermediates/dex/debug/mergeDexDebug/out
+path.0=classes.dex
+renamed.0=classes.dex

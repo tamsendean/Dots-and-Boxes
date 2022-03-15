@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Mar 16 21:01:59 PDT 2021
+0.baseType=DIRECTORY
+0.base=/Users/tamsendean/AndroidStudioProjects/PigGameStarter/app/build/intermediates/dex/debug/mergeDexDebug/out
+0.path=classes.dex
+0.set=DEX
+count=1
