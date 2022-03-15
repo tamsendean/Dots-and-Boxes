@@ -25,6 +25,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/game_local_tab" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -37,6 +38,18 @@
             <include
                 android:id="@+id/remoteTabLayout"
                 layout="@layout/game_remote_tab" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gameSettingsTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/tab_height" >
+
+            <include
+                android:id="@+id/settingsTabLayout"
+                layout="@layout/game_settings_tab" />
         </LinearLayout>
     </FrameLayout>
 
