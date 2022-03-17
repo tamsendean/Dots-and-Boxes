@@ -7,7 +7,7 @@
  * @author Bryan Soriano-Salinas
  *
  */
-package edu.up.cs301.GameFramework.infoMessage;
+package edu.up.cs301.db;
 
 public enum STATE {
         GAME_SETUP,

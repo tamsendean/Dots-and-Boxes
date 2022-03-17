@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
-import edu.up.cs301.GameFramework.infoMessage.DBGameState;
+import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.utilities.IPCoder;
@@ -189,7 +189,7 @@ public class ProxyGame implements Game {
      * @return DBGameState
      */
     @Override
-    public DBGameState getGameState(){
+    public GameState getGameState(){
         return null;
     }
 }

@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.db;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.game.R;
@@ -23,14 +23,14 @@ import android.widget.TextView;
 * @author Andrew M. Nuxoll
 * @version September 2013
 */
-public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
+public class DBSmartAI extends DBDumbAI {
 	
 	/*
 	 * instance variables
 	 */
 	
-	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterStateDB currentGameState = null;
+	// the most recent game state, as given to us by the DBLocalGame
+	private DBGameState currentGameState = null;
 	
 	// If this player is running the GUI, the activity (null if the player is
 	// not running a GUI).
@@ -50,7 +50,7 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 	 * @param name
 	 * 		the player's name
 	 */
-	public CounterComputerPlayer2(String name) {
+	public DBSmartAI(String name) {
 		super(name);
 	}
 	
@@ -71,9 +71,9 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 		if (game == null) {
 			return;
 		}
-		else if (info instanceof CounterStateDB) {
+		else if (info instanceof CounterState) {
 			// if we indeed have a counter-state, update the GUI
-			currentGameState = (CounterStateDB)info;
+			currentGameState = (CounterState)info;
 			updateDisplay();
 		}
 	}

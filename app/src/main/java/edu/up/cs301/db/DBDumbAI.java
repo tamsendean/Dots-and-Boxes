@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.db;
 
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
@@ -13,15 +13,15 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class CounterComputerPlayer1 extends GameComputerPlayer implements Tickable {
+public class DBDumbAI extends GameComputerPlayer implements Tickable {
 	
     /**
-     * Constructor for objects of class CounterComputerPlayer1
+     * Constructor for objects of class DBDumbAI
      * 
      * @param name
      * 		the player's name
      */
-    public CounterComputerPlayer1(String name) {
+    public DBDumbAI(String name) {
         // invoke superclass constructor
         super(name);
         
@@ -53,6 +53,6 @@ public class CounterComputerPlayer1 extends GameComputerPlayer implements Tickab
 		boolean move = Math.random() >= 0.5;
 		
 		// send the move-action to the game
-		game.sendAction(new CounterMoveAction(this, move));
+		game.sendAction(new DBMoveAction(this, move));
 	}
 }

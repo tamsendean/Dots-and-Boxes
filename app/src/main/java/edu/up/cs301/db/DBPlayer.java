@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.db;
 
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
@@ -23,15 +23,15 @@ import android.view.View.OnClickListener;
  * @author Andrew M. Nuxoll
  * @version July 2013
  */
-public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListener {
+public class DBPlayer extends GameHumanPlayer implements OnClickListener {
 
 	/* instance variables */
 	
 	// The TextView the displays the current counter value
 	private TextView counterValueTextView;
 	
-	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterStateDB state;
+	// the most recent game state, as given to us by the DBLocalGame
+	private DBGameState state;
 	
 	// the android activity that we are running
 	private GameMainActivity myActivity;
@@ -41,7 +41,7 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	 * @param name
 	 * 		the player's name
 	 */
-	public CounterHumanPlayer(String name) {
+	public DBPlayer(String name) {
 		super(name);
 	}
 
@@ -65,7 +65,7 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 
 	/**
 	 * this method gets called when the user clicks the '+' or '-' button. It
-	 * creates a new CounterMoveAction to return to the parent activity.
+	 * creates a new DBMoveAction to return to the parent activity.
 	 * 
 	 * @param button
 	 * 		the button that was clicked
@@ -78,11 +78,11 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 		GameAction action = null;
 		if (button.getId() == R.id.plusButton) {
 			// plus button: create "increment" action
-			action = new CounterMoveAction(this, true);
+			action = new DBMoveAction(this, true);
 		}
 		else if (button.getId() == R.id.minusButton) {
 			// minus button: create "decrement" action
-			action = new CounterMoveAction(this, false);
+			action = new DBMoveAction(this, false);
 		}
 		else {
 			// something else was pressed: ignore
@@ -100,11 +100,11 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
-		// ignore the message if it's not a CounterStateDB message
-		if (!(info instanceof CounterStateDB)) return;
+		// ignore the message if it's not a DBGameStateDB message
+		if (!(info instanceof DBGameState)) return;
 		
 		// update our state; then update the display
-		this.state = (CounterStateDB)info;
+		this.state = (DBGameState)info;
 		updateDisplay();
 	}
 	
@@ -140,5 +140,5 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 		}
 	}
 
-}// class CounterHumanPlayer
+}// class DBPlayer
 

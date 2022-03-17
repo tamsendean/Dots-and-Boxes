@@ -1,6 +1,6 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.db;
 
-import edu.up.cs301.GameFramework.infoMessage.DBGameState;
+import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
@@ -9,13 +9,13 @@ import android.util.Log;
 /**
  * A class that represents the state of a game. In our counter game, the only
  * relevant piece of information is the value of the game's counter. The
- * CounterStateDB object is therefore very simple.
+ * DBGameStateDB object is therefore very simple.
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
  * @version July 2013
  */
-public class CounterLocalGame extends LocalGame {
+public class DBLocalGame extends LocalGame {
 
 	// When a counter game is played, any number of players. The first player
 	// is trying to get the counter value to TARGET_MAGNITUDE; the second player,
@@ -25,7 +25,7 @@ public class CounterLocalGame extends LocalGame {
 	public static final int TARGET_MAGNITUDE = 10;
 
 	// the game's state
-	private CounterStateDB gameState;
+	private DBGameState gameState;
 	
 	/**
 	 * can this player move
@@ -41,27 +41,28 @@ public class CounterLocalGame extends LocalGame {
 
 	/**
 	 * This ctor should be called when a new counter game is started
+	 * @param state
 	 */
-	public CounterLocalGame(DBGameState state) {
+	public DBLocalGame(GameState state) {
 		// initialize the game state, with the counter value starting at 0
-		if (! (state instanceof CounterStateDB)) {
-			state = new CounterStateDB(0);
+		if (! (state instanceof DBGameState)) {
+			state = new DBGameState(0);
 		}
-		this.gameState = (CounterStateDB)state;
+		this.gameState = (DBGameState)state;
 		super.state = state;
 	}
 
 	/**
-	 * The only type of GameAction that should be sent is CounterMoveAction
+	 * The only type of GameAction that should be sent is DBMoveAction
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
 		Log.i("action", action.getClass().toString());
 		
-		if (action instanceof CounterMoveAction) {
+		if (action instanceof DBMoveAction) {
 		
-			// cast so that we Java knows it's a CounterMoveAction
-			CounterMoveAction cma = (CounterMoveAction)action;
+			// cast so that we Java knows it's a DBMoveAction
+			DBMoveAction cma = (DBMoveAction)action;
 
 			// Update the counter values based upon the action
 			int result = gameState.getCounter() + (cma.isPlus() ? 1 : -1);
@@ -83,7 +84,7 @@ public class CounterLocalGame extends LocalGame {
 	protected void sendUpdatedStateTo(GamePlayer p) {
 		// this is a perfect-information game, so we'll make a
 		// complete copy of the state to send to the player
-		p.sendInfo(new CounterStateDB(this.gameState));
+		p.sendInfo(new DBGameState(this.gameState));
 		
 	}//sendUpdatedSate
 	
@@ -124,4 +125,4 @@ public class CounterLocalGame extends LocalGame {
 
 	}
 
-}// class CounterLocalGame
+}// class DBLocalGame

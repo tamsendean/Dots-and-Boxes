@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import edu.up.cs301.GameFramework.infoMessage.DBGameState;
+import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 /**
  * Helper-class for writing and reading save files
@@ -30,17 +30,16 @@ public class Saving {
 
     /**
      * writeToFile, this saves a given string to a file. Designed to save gameStates
-     * @param DBGameState
+     * @param GameState
      *              The String representation of the DBGameState to save
      * @param fileName
      *              This Name of the file to write to
      * @param context
-     *              The current context. (Must not be null).
      */
-    public static void writeToFile(DBGameState DBGameState, String fileName, Context context) {
+    public static void writeToFile(GameState GameState, String fileName, Context context) {
         try {
             ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE));
-            out.writeObject(DBGameState);
+            out.writeObject(GameState);
             out.flush();
             out.close();
         }
@@ -58,12 +57,12 @@ public class Saving {
      *              The current context. (Must not be null).
      * @return String represantion of the gameState to load
      */
-    public static DBGameState readFromFile(String fileName, Context context) {
+    public static GameState readFromFile(String fileName, Context context) {
         try {
             ObjectInputStream in = new ObjectInputStream(context.openFileInput(fileName));
-            DBGameState DBGameState = (DBGameState) in.readObject();
+            GameState GameState = (GameState) in.readObject();
             in.close();
-            return DBGameState;
+            return GameState;
         }
         catch (FileNotFoundException e) {
             Logger.log(TAG, "File not Found: " + e.toString() , Logger.ERROR);
