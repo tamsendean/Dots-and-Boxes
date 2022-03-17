@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
+
 /**
  * Main Activity for Dots and Boxes
  *
