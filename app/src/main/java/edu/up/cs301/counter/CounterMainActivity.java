@@ -3,7 +3,7 @@ package edu.up.cs301.counter;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
-import edu.up.cs301.GameFramework.infoMessage.GameState;
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
@@ -82,8 +82,8 @@ public class CounterMainActivity extends GameMainActivity {
 	 * 		the local game, a counter game
 	 */
 	@Override
-	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new CounterState(0);
+	public LocalGame createLocalGame(DBGameState state) {
+		if (state == null) state = new CounterStateDB(0);
 		return new CounterLocalGame(state);
 	}
 

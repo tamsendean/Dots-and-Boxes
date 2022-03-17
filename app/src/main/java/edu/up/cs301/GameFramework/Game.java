@@ -1,7 +1,7 @@
 package edu.up.cs301.GameFramework;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
-import edu.up.cs301.GameFramework.infoMessage.GameState;
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 
 /**
@@ -37,8 +37,8 @@ public interface Game {
     /**
      * returns the current gameState.
      *
-     * @return GameState
+     * @return DBGameState
      */
-    GameState getGameState();
+    DBGameState getGameState();
 
 }

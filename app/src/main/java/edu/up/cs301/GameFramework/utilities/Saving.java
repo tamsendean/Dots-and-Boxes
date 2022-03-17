@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import edu.up.cs301.GameFramework.infoMessage.GameState;
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
 
 /**
  * Helper-class for writing and reading save files
@@ -30,17 +30,17 @@ public class Saving {
 
     /**
      * writeToFile, this saves a given string to a file. Designed to save gameStates
-     * @param gameState
-     *              The String representation of the gameState to save
+     * @param DBGameState
+     *              The String representation of the DBGameState to save
      * @param fileName
      *              This Name of the file to write to
      * @param context
      *              The current context. (Must not be null).
      */
-    public static void writeToFile(GameState gameState, String fileName, Context context) {
+    public static void writeToFile(DBGameState DBGameState, String fileName, Context context) {
         try {
             ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE));
-            out.writeObject(gameState);
+            out.writeObject(DBGameState);
             out.flush();
             out.close();
         }
@@ -58,12 +58,12 @@ public class Saving {
      *              The current context. (Must not be null).
      * @return String represantion of the gameState to load
      */
-    public static GameState readFromFile(String fileName, Context context) {
+    public static DBGameState readFromFile(String fileName, Context context) {
         try {
             ObjectInputStream in = new ObjectInputStream(context.openFileInput(fileName));
-            GameState gameState = (GameState) in.readObject();
+            DBGameState DBGameState = (DBGameState) in.readObject();
             in.close();
-            return gameState;
+            return DBGameState;
         }
         catch (FileNotFoundException e) {
             Logger.log(TAG, "File not Found: " + e.toString() , Logger.ERROR);

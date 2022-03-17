@@ -7,8 +7,8 @@ import edu.up.cs301.GameFramework.actionMessage.MyNameIsAction;
 import edu.up.cs301.GameFramework.actionMessage.ReadyAction;
 import edu.up.cs301.GameFramework.actionMessage.TimerAction;
 import edu.up.cs301.GameFramework.infoMessage.BindGameInfo;
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
 import edu.up.cs301.GameFramework.infoMessage.GameOverInfo;
-import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.infoMessage.IllegalMoveInfo;
 import edu.up.cs301.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.GameFramework.infoMessage.StartGameInfo;
@@ -66,7 +66,7 @@ public abstract class LocalGame implements Game, Tickable {
     private GameTimer myTimer = new GameTimer(this);
 
     // the game's state
-    protected GameState state;
+    protected DBGameState state;
 
     /**
      * Returns the game's timer
@@ -461,10 +461,10 @@ public abstract class LocalGame implements Game, Tickable {
     /**
      * returns the current gameState
      *
-     * @return GameState
+     * @return DBGameState
      */
     @Override
-    public GameState getGameState(){
+    public DBGameState getGameState(){
         return state;
     }
 

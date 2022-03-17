@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
+import edu.up.cs301.GameFramework.infoMessage.DBGameState;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.utilities.IPCoder;
 import edu.up.cs301.GameFramework.utilities.NetworkObjectPasser;
@@ -89,7 +89,7 @@ public class ProxyGame implements Game {
                 try {
                     boolean b = obj instanceof GameInfo;
                     if (b) {
-                        // object is a GameState object
+                        // object is a DBGameState object
                         GameInfo gs = (GameInfo)obj;
                         gs.setGame(ProxyGame.this);
                         synchronized(this) {
@@ -186,10 +186,10 @@ public class ProxyGame implements Game {
     /**
      * returns null because network saving is not implemented yet.
      *
-     * @return GameState
+     * @return DBGameState
      */
     @Override
-    public GameState getGameState(){
+    public DBGameState getGameState(){
         return null;
     }
 }
