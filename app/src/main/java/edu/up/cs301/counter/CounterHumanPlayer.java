@@ -31,7 +31,7 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	private TextView counterValueTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterStateDB state;
+	private BoxStateDB state;
 	
 	// the android activity that we are running
 	private GameMainActivity myActivity;
@@ -101,10 +101,10 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	@Override
 	public void receiveInfo(GameInfo info) {
 		// ignore the message if it's not a CounterStateDB message
-		if (!(info instanceof CounterStateDB)) return;
+		if (!(info instanceof BoxStateDB)) return;
 		
 		// update our state; then update the display
-		this.state = (CounterStateDB)info;
+		this.state = (BoxStateDB)info;
 		updateDisplay();
 	}
 	

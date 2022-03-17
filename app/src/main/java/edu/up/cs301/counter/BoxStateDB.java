@@ -10,7 +10,12 @@ import edu.up.cs301.GameFramework.infoMessage.DBGameState;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
-public class CounterStateDB extends DBGameState {
+public class BoxStateDB extends DBGameState {
+	boolean top = false;
+	boolean bottom = false;
+	boolean left = false;
+	boolean right = false;
+	char c = ' ';
 	
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
@@ -24,7 +29,14 @@ public class CounterStateDB extends DBGameState {
 	 * @param counterVal
 	 * 		the value to which the counter's value should be initialized
 	 */
-	public CounterStateDB(int counterVal) {
+	public BoxStateDB(boolean Top, boolean Bottom, boolean Left, boolean Right, char C) {
+		setTop(top);
+		setBottom(bottom);
+		setLeft(left);
+		setRight(right);
+		setC(c);
+	}
+	public BoxStateDB(int counterVal) {
 		counter = counterVal;
 	}
 	
@@ -34,7 +46,7 @@ public class CounterStateDB extends DBGameState {
 	 * @param orig
 	 * 		the object from which the copy should be made
 	 */
-	public CounterStateDB(CounterStateDB orig) {
+	public BoxStateDB(BoxStateDB orig) {
 		// set the counter to that of the original
 		this.counter = orig.counter;
 	}
@@ -58,4 +70,49 @@ public class CounterStateDB extends DBGameState {
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
-}
+
+
+
+
+		public boolean isTop() {
+			return this.top;
+		}
+
+		public void setTop(boolean top) {
+			this.top = top;
+		}
+
+		public boolean isBottom() {
+			return this.bottom;
+		}
+
+		public void setBottom(boolean bottom) {
+			this.bottom = bottom;
+		}
+
+		public boolean isLeft() {
+			return this.left;
+		}
+
+		public void setLeft(boolean left) {
+			this.left = left;
+		}
+
+		public boolean isRight() {
+			return this.right;
+		}
+
+		public void setRight(boolean right) {
+			this.right = right;
+		}
+
+		public char getC() {
+			return this.c;
+		}
+
+		public void setC(char c) {
+			this.c = c;
+		}
+
+
+	}

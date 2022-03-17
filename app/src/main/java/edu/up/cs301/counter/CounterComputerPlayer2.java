@@ -30,7 +30,7 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 	 */
 	
 	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterStateDB currentGameState = null;
+	private BoxStateDB currentGameState = null;
 	
 	// If this player is running the GUI, the activity (null if the player is
 	// not running a GUI).
@@ -71,9 +71,9 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 		if (game == null) {
 			return;
 		}
-		else if (info instanceof CounterStateDB) {
+		else if (info instanceof BoxStateDB) {
 			// if we indeed have a counter-state, update the GUI
-			currentGameState = (CounterStateDB)info;
+			currentGameState = (BoxStateDB)info;
 			updateDisplay();
 		}
 	}

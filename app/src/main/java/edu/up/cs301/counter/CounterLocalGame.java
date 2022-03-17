@@ -25,7 +25,7 @@ public class CounterLocalGame extends LocalGame {
 	public static final int TARGET_MAGNITUDE = 10;
 
 	// the game's state
-	private CounterStateDB gameState;
+	private BoxStateDB gameState;
 	
 	/**
 	 * can this player move
@@ -44,10 +44,10 @@ public class CounterLocalGame extends LocalGame {
 	 */
 	public CounterLocalGame(DBGameState state) {
 		// initialize the game state, with the counter value starting at 0
-		if (! (state instanceof CounterStateDB)) {
-			state = new CounterStateDB(0);
+		if (! (state instanceof BoxStateDB)) {
+			state = new BoxStateDB(0);
 		}
-		this.gameState = (CounterStateDB)state;
+		this.gameState = (BoxStateDB)state;
 		super.state = state;
 	}
 
@@ -83,7 +83,7 @@ public class CounterLocalGame extends LocalGame {
 	protected void sendUpdatedStateTo(GamePlayer p) {
 		// this is a perfect-information game, so we'll make a
 		// complete copy of the state to send to the player
-		p.sendInfo(new CounterStateDB(this.gameState));
+		p.sendInfo(new BoxStateDB(this.gameState));
 		
 	}//sendUpdatedSate
 	

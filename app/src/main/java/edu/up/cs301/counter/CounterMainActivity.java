@@ -83,7 +83,7 @@ public class CounterMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public LocalGame createLocalGame(DBGameState state) {
-		if (state == null) state = new CounterStateDB(0);
+		if (state == null) state = new BoxStateDB(0);
 		return new CounterLocalGame(state);
 	}
 
