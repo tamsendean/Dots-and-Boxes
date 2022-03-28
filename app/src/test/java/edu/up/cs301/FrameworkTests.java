@@ -57,7 +57,7 @@ public class FrameworkTests {
     public void test_createLocalGame(){
         //TODO: Change to your game State
         LocalGame localGame = activity.createLocalGame(new TTTState());
-        assertTrue("DBGameState was null", localGame.getGameState() != null);
+        assertTrue("DBAction was null", localGame.getGameState() != null);
     }
 
     //Verifies the configuration can be saved and loaded

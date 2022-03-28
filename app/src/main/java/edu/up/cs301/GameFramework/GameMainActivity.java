@@ -525,23 +525,9 @@ public abstract class GameMainActivity extends Activity implements
             case R.id.menu_help:
                 Logger.log(TAG, "This is the help button!");
                 return true;
-            case R.id.save_game:
-                Logger.log(TAG, "This is the save button!");
-                if( this.game != null){
-                    Logger.log(TAG, "The Game Exists!");
-                    MessageBox.popUpSaveGame("Name your game:", this);
-                } else {
-                    Logger.log(TAG, "No Game Exists!");
-                    MessageBox.popUpMessage("You cannot save a game without first starting a game (Click Anywhere to dismiss).", this);
-                }
-                return true;
             case R.id.load_game:
                 Logger.log(TAG, "This is the loading button!");
                 MessageBox.popUpLoadGame("Select Your Game: ", this);
-                return true;
-            case R.id.delete_game:
-                Logger.log(TAG, "This is the delete button!");
-                MessageBox.popUpDeleteGame("Select the Game to Delete: ", this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

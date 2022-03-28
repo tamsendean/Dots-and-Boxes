@@ -31,7 +31,7 @@ public class Saving {
     /**
      * writeToFile, this saves a given string to a file. Designed to save gameStates
      * @param GameState
-     *              The String representation of the DBGameState to save
+     *              The String representation of the DBAction to save
      * @param fileName
      *              This Name of the file to write to
      * @param context

@@ -89,7 +89,7 @@ public class ProxyGame implements Game {
                 try {
                     boolean b = obj instanceof GameInfo;
                     if (b) {
-                        // object is a DBGameState object
+                        // object is a DBAction object
                         GameInfo gs = (GameInfo)obj;
                         gs.setGame(ProxyGame.this);
                         synchronized(this) {
@@ -186,7 +186,7 @@ public class ProxyGame implements Game {
     /**
      * returns null because network saving is not implemented yet.
      *
-     * @return DBGameState
+     * @return DBAction
      */
     @Override
     public GameState getGameState(){

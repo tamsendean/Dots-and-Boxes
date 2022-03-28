@@ -37,7 +37,7 @@ public interface Game {
     /**
      * returns the current gameState.
      *
-     * @return DBGameState
+     * @return DBAction
      */
     GameState getGameState();
 
