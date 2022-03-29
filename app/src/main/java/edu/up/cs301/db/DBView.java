@@ -28,7 +28,7 @@ public class DBView extends View implements Observer {
     protected DBAction game;
     protected GameState move;
     protected Paint paint;
-    protected PlayerInfo playersState;
+    protected PlayerInfo currentPlayer;
 
     public DBView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -47,8 +47,8 @@ public class DBView extends View implements Observer {
                 getResources().getColor(R.color.colorP2)};
     }
 
-    public void setPlayersState(PlayerInfo playersState) {
-        this.playersState = playersState;
+    public void setCurrentPlayer(PlayerInfo currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public void startGame(Player[] players) {
@@ -112,7 +112,7 @@ public class DBView extends View implements Observer {
         //paint boxes
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
-                paint.setColor(game.getPlayerBox(j, i) == null ? Color.TRANSPARENT : playerColors[Player.indexIn(game.getPlayerBox(j, i), game.getPlayers())]);
+                paint.setColor(game.getPlayerBox(j, i) == null ? Color.TRANSPARENT : playerColors[Player.playerNum(game.getPlayerBox(j, i), game.getPlayers())]);
                 canvas.drawRect(start + gridSize * i + lineWidth + fillSize, start
                         + gridSize * j + lineWidth + fillSize, start + gridSize * i + lineWidth
                         + clickYPos - fillSize, start + gridSize * j + lineWidth + clickYPos
@@ -182,16 +182,16 @@ public class DBView extends View implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        playersState.setCurrentPlayer(game.currentPlayer());
+        currentPlayer.setCurrentPlayer(game.currentPlayer());
         Map<Player, Integer> playerBoxCount = new HashMap<>();
         for (Player player : game.getPlayers()) {
             playerBoxCount.put(player, game.getPlayerBoxCount(player));
         }
-        playersState.setScore(playerBoxCount);
+        currentPlayer.setScore(playerBoxCount);
 
         Player winner = game.getWinner();
         if (winner != null) {
-            playersState.setWinner(winner);
+            currentPlayer.setWinner(winner);
         }
     }
 }

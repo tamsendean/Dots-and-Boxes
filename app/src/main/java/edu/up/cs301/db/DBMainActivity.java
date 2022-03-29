@@ -25,7 +25,7 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		setContentView(R.layout.activity_main);
 
 		gameView = (DBView) findViewById(R.id.gameView);
-		gameView.setPlayersState(this);
+		gameView.setCurrentPlayer(this);
 
 		player1 = (TextView) findViewById(R.id.player1name);
 		player2 = (TextView) findViewById(R.id.player2name);
