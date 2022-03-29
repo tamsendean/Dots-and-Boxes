@@ -1,7 +1,12 @@
-package edu.up.cs301.db;
+package edu.up.cs301.db.players;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.up.cs301.db.BoxObj;
+import edu.up.cs301.db.GameState;
+import edu.up.cs301.db.LineDirection;
+import edu.up.cs301.db.players.Player;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -12,17 +17,19 @@ import java.util.List;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class DumbComputerPlayer extends Player {
+public class AverageComputerPlayer extends Player {
+    protected final ArrayList<GameState> safeMoves;
     protected final ArrayList<GameState> badMoves;
 
-    public DumbComputerPlayer(String name) {
+    public AverageComputerPlayer(String name) {
         super(name);
 
+        safeMoves = new ArrayList<>();
         badMoves = new ArrayList<>();
     }
 
     protected GameState nextMove() {
-        if (badMoves.size() != 0) return getRandomBadLine();
+        if (safeMoves.size() != 0) return getRandomSafeLine();
 
         return getRandomBadLine();
     }
@@ -34,6 +41,7 @@ public class DumbComputerPlayer extends Player {
 
     private void initGrid() {
         badMoves.clear();
+        safeMoves.clear();
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
@@ -46,6 +54,7 @@ public class DumbComputerPlayer extends Player {
                                 break;
                             case 1:
                             case 0:
+                                safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
                         }
                     } else if (i == 5) {
                         switch (getBox(i - 1, j).lineCount()) {
@@ -55,11 +64,12 @@ public class DumbComputerPlayer extends Player {
                                 break;
                             case 1:
                             case 0:
+                                safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
                         }
                     } else {
                         if (getBox(i, j).lineCount() == 3
                                 || getBox(i - 1, j).lineCount() == 3)
-                            badMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+                            safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
 
                         if (getBox(i, j).lineCount() == 2
                                 || getBox(i - 1, j).lineCount() == 2)
@@ -67,21 +77,21 @@ public class DumbComputerPlayer extends Player {
 
                         if (getBox(i, j).lineCount() < 2
                                 && getBox(i - 1, j).lineCount() < 2)
-                            badMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+                            safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
                     }
                 }
 
                 if (!verticalChecked(j, i)) {
                     if (i == 0) {
                         if (getBox(j, i).lineCount() == 3)
-                            badMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+                            safeMoves.add(new GameState(LineDirection.VERTICAL, j, i));
                     } else if (i == 5) {
                         if (getBox(j, i - 1).lineCount() == 3)
-                            badMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+                            safeMoves.add(new GameState(LineDirection.VERTICAL, j, i));
                     } else {
                         if (getBox(j, i).lineCount() == 3
                                 || getBox(j, i - 1).lineCount() == 3)
-                            badMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+                            safeMoves.add(new GameState(LineDirection.VERTICAL, j, i));
 
                         if (getBox(j, i).lineCount() == 2
                                 || getBox(j, i - 1).lineCount() == 2)
@@ -89,7 +99,7 @@ public class DumbComputerPlayer extends Player {
 
                         if (getBox(j, i).lineCount() < 2
                                 && getBox(j, i - 1).lineCount() < 2)
-                            badMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+                            safeMoves.add(new GameState(LineDirection.VERTICAL, j, i));
                     }
                 }
             }
@@ -107,6 +117,10 @@ public class DumbComputerPlayer extends Player {
 
     protected boolean verticalChecked(int row, int column) {
         return getGame().lineChecked(LineDirection.VERTICAL, row, column);
+    }
+
+    protected GameState getRandomSafeLine() {
+        return getRandomLine(safeMoves);
     }
 
     protected GameState getRandomBadLine() {

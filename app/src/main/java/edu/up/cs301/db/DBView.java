@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.up.cs301.db.players.DBPlayer;
+import edu.up.cs301.db.players.Player;
 import edu.up.cs301.game.R;
 
 public class DBView extends View implements Observer {

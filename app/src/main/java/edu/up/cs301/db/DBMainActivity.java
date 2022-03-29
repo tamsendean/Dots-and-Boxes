@@ -9,6 +9,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import java.util.Map;
 
+import edu.up.cs301.db.players.AverageComputerPlayer;
+import edu.up.cs301.db.players.DBPlayer;
+import edu.up.cs301.db.players.DumbComputerPlayer;
+import edu.up.cs301.db.players.Player;
+import edu.up.cs301.db.players.SmartComputerPlayer;
 import edu.up.cs301.game.R;
 
 

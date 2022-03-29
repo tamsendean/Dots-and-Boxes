@@ -1,4 +1,7 @@
-package edu.up.cs301.db;
+package edu.up.cs301.db.players;
+
+import edu.up.cs301.db.GameState;
+import edu.up.cs301.db.players.Player;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
