@@ -15,14 +15,14 @@ import java.util.Observer;
 import edu.up.cs301.game.R;
 
 public class DBView extends View implements Observer {
-    protected static final float radius = (float) 14 / 824;
-    protected static final float start = (float) 6 / 824;
-    protected static final float dot1 = (float) 18 / 824;
-    protected static final float dot2 = (float) 2 / 824;
-    protected static final float dot3 = (float) 14 / 824;
-    protected static final float dot4 = (float) 141 / 824;
-    protected static final float dot5 = (float) 159 / 824;
-    protected static final float dot6 = (float) 9 / 824;
+    protected static final float radius = (float) 0.02;
+    protected static final float start = (float) 0.01;
+    protected static final float lineWidth = (float) 0.02;
+    protected static final float fillSize = (float) 0.002;
+    protected static final float clickXPos = (float) 0.017;
+    protected static final float clickYPos = (float) 0.17;
+    protected static final float gridSize = (float) 0.19;
+    protected static final float dotsPos = (float) 0.01;
 
     protected final int[] playerColors;
     protected DBAction game;
@@ -67,18 +67,17 @@ public class DBView extends View implements Observer {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(0x00FFFFFF);
-        int min = Math.min(getWidth(), getHeight());
-        float radius = DBView.radius * min;
-        float start = DBView.start * min;
-        float dot1 = DBView.dot1 * min;
-        float dot2 = DBView.dot2 * min;
-        float dot4 = DBView.dot4 * min;
-        float dot5 = DBView.dot5 * min;
-        float dot6 = DBView.dot6 * min;
+        canvas.drawColor(Color.WHITE);
+        int pos = Math.min(getWidth(), getHeight());
+        float radius = DBView.radius * pos;
+        float start = DBView.start * pos;
+        float lineWidth = DBView.lineWidth * pos;
+        float fillSize = DBView.fillSize * pos;
+        float clickYPos = DBView.clickYPos * pos;
+        float gridSize = DBView.gridSize * pos;
+        float dotsPos = DBView.dotsPos * pos;
 
         //paint lines
-        paint.setColor(0xFF000000);
         for (int i = 0; i < game.getHeight() + 1; i++) {
             for (int j = 0; j < game.getWidth(); j++) {
                 GameState horizontal = new GameState(LineDirection.HORIZONTAL, i, j);
@@ -88,12 +87,12 @@ public class DBView extends View implements Observer {
                     else
                         paint.setColor(playerColors[1]);
                 } else {
-                    paint.setColor(0xFFFFFFFF);
+                    paint.setColor(0xFFF3F3F3);
                 }
-                final float bottom = start + dot5 * i + dot1
-                        - dot2;
-                canvas.drawRect(start + dot5 * j + dot1, start + dot5 * i
-                        + dot2, start + dot5 * (j + 1), bottom, paint);
+                final float bottom = start + gridSize * i + lineWidth
+                        - fillSize;
+                canvas.drawRect(start + gridSize * j + lineWidth, start + gridSize * i
+                        + fillSize, start + gridSize * (j + 1), bottom, paint);
 
                 GameState vertical = new GameState(LineDirection.VERTICAL, j, i);
                 if (game.lineChecked(vertical)) {
@@ -102,10 +101,10 @@ public class DBView extends View implements Observer {
                     else
                         paint.setColor(playerColors[1]);
                 } else {
-                    paint.setColor(0xFFFFFFFF);
+                    paint.setColor(0xFFF3F3F3);
                 }
-                canvas.drawRect(start + dot5 * i + dot2, start + dot5 * j
-                        + dot1, bottom, start + dot5
+                canvas.drawRect(start + gridSize * i + fillSize, start + gridSize * j
+                        + lineWidth, bottom, start + gridSize
                         * (j + 1), paint);
             }
         }
@@ -114,10 +113,10 @@ public class DBView extends View implements Observer {
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
                 paint.setColor(game.getPlayerBox(j, i) == null ? Color.TRANSPARENT : playerColors[Player.indexIn(game.getPlayerBox(j, i), game.getPlayers())]);
-                canvas.drawRect(start + dot5 * i + dot1 + dot2, start
-                        + dot5 * j + dot1 + dot2, start + dot5 * i + dot1
-                        + dot4 - dot2, start + dot5 * j + dot1 + dot4
-                        - dot2, paint);
+                canvas.drawRect(start + gridSize * i + lineWidth + fillSize, start
+                        + gridSize * j + lineWidth + fillSize, start + gridSize * i + lineWidth
+                        + clickYPos - fillSize, start + gridSize * j + lineWidth + clickYPos
+                        - fillSize, paint);
             }
         }
 
@@ -125,7 +124,7 @@ public class DBView extends View implements Observer {
         paint.setColor(Color.BLACK);
         for (int i = 0; i < game.getHeight() + 1; i++) {
             for (int j = 0; j < game.getWidth() + 1; j++) {
-                canvas.drawCircle(start + dot6 + j * dot5 + 1, start + dot6 + i * dot5 + 1,
+                canvas.drawCircle(start + dotsPos + j * gridSize + 1, start + dotsPos + i * gridSize + 1,
                         radius, paint);
             }
         }
@@ -139,44 +138,44 @@ public class DBView extends View implements Observer {
 
         float XClicked = event.getX();
         float YClicked = event.getY();
-        int min = Math.min(getWidth(), getHeight());
-        float start = DBView.start * min;
-        float dot1 = DBView.dot1 * min;
-        float dot2 = DBView.dot2 * min;
-        float dot3 = DBView.dot3 * min;
-        float dot5 = DBView.dot5 * min;
-        int d = -1, a = -1, b = -1;
+        int pos = Math.min(getWidth(), getHeight());
+        float start = DBView.start * pos;
+        float lineWidth = DBView.lineWidth * pos;
+        float fillSize = DBView.fillSize * pos;
+        float clickXPos = DBView.clickXPos * pos;
+        float gridSize = DBView.gridSize * pos;
+        int x = -1, y = -1, z = -1;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                final float v = start + dot5 * i + dot2 - dot3;
-                final float v1 = start + dot5 * j + dot1 - dot3;
-                final float v2 = start + dot5 * i + dot1 - dot2 + dot3;
+                final float v = start + gridSize * i + fillSize - clickXPos;
+                final float v1 = start + gridSize * j + lineWidth - clickXPos;
+                final float v2 = start + gridSize * i + lineWidth - fillSize + clickXPos;
                 if (v1 <= XClicked
-                        && XClicked <= (start + dot5 * (j + 1) + dot3)
+                        && XClicked <= (start + gridSize * (j + 1) + clickXPos)
                         && YClicked >= v
                         && YClicked <= v2) {
-                    d = 0;
-                    a = i;
-                    b = j;
+                    x = 0;
+                    y = i;
+                    z = j;
                 }
                 if (v <= XClicked
                         && XClicked <= v2
                         && YClicked >= v1
-                        && YClicked <= start + dot5 * (j + 1) + dot3) {
-                    d = 1;
-                    a = j;
-                    b = i;
+                        && YClicked <= start + gridSize * (j + 1) + clickXPos) {
+                    x = 1;
+                    y = j;
+                    z = i;
                 }
             }
         }
 
-        if ((a != -1) && (b != -1)) {
+        if ((y != -1) && (z != -1)) {
             LineDirection direction;
-            if (d == 0)
+            if (x == 0)
                 direction = LineDirection.HORIZONTAL;
             else
                 direction = LineDirection.VERTICAL;
-            move = new GameState(direction, a, b);
+            move = new GameState(direction, y, z);
             ((DBPlayer) game.currentPlayer()).add(move);
         }
     }
