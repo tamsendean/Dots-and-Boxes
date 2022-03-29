@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -18,12 +17,12 @@ import edu.up.cs301.game.R;
 public class DBView extends View implements Observer {
     protected static final float radius = (float) 14 / 824;
     protected static final float start = (float) 6 / 824;
-    protected static final float add1 = (float) 18 / 824;
-    protected static final float add2 = (float) 2 / 824;
-    protected static final float add3 = (float) 14 / 824;
-    protected static final float add4 = (float) 141 / 824;
-    protected static final float add5 = (float) 159 / 824;
-    protected static final float add6 = (float) 9 / 824;
+    protected static final float dot1 = (float) 18 / 824;
+    protected static final float dot2 = (float) 2 / 824;
+    protected static final float dot3 = (float) 14 / 824;
+    protected static final float dot4 = (float) 141 / 824;
+    protected static final float dot5 = (float) 159 / 824;
+    protected static final float dot6 = (float) 9 / 824;
 
     protected final int[] playerColors;
     protected DBAction game;
@@ -72,11 +71,11 @@ public class DBView extends View implements Observer {
         int min = Math.min(getWidth(), getHeight());
         float radius = DBView.radius * min;
         float start = DBView.start * min;
-        float add1 = DBView.add1 * min;
-        float add2 = DBView.add2 * min;
-        float add4 = DBView.add4 * min;
-        float add5 = DBView.add5 * min;
-        float add6 = DBView.add6 * min;
+        float dot1 = DBView.dot1 * min;
+        float dot2 = DBView.dot2 * min;
+        float dot4 = DBView.dot4 * min;
+        float dot5 = DBView.dot5 * min;
+        float dot6 = DBView.dot6 * min;
 
         //paint lines
         paint.setColor(0xFF000000);
@@ -91,9 +90,10 @@ public class DBView extends View implements Observer {
                 } else {
                     paint.setColor(0xFFFFFFFF);
                 }
-                canvas.drawRect(start + add5 * j + add1, start + add5 * i
-                        + add2, start + add5 * (j + 1), start + add5 * i + add1
-                        - add2, paint);
+                final float bottom = start + dot5 * i + dot1
+                        - dot2;
+                canvas.drawRect(start + dot5 * j + dot1, start + dot5 * i
+                        + dot2, start + dot5 * (j + 1), bottom, paint);
 
                 GameState vertical = new GameState(LineDirection.VERTICAL, j, i);
                 if (game.lineChecked(vertical)) {
@@ -104,8 +104,8 @@ public class DBView extends View implements Observer {
                 } else {
                     paint.setColor(0xFFFFFFFF);
                 }
-                canvas.drawRect(start + add5 * i + add2, start + add5 * j
-                        + add1, start + add5 * i + add1 - add2, start + add5
+                canvas.drawRect(start + dot5 * i + dot2, start + dot5 * j
+                        + dot1, bottom, start + dot5
                         * (j + 1), paint);
             }
         }
@@ -114,10 +114,10 @@ public class DBView extends View implements Observer {
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
                 paint.setColor(game.getPlayerBox(j, i) == null ? Color.TRANSPARENT : playerColors[Player.indexIn(game.getPlayerBox(j, i), game.getPlayers())]);
-                canvas.drawRect(start + add5 * i + add1 + add2, start
-                        + add5 * j + add1 + add2, start + add5 * i + add1
-                        + add4 - add2, start + add5 * j + add1 + add4
-                        - add2, paint);
+                canvas.drawRect(start + dot5 * i + dot1 + dot2, start
+                        + dot5 * j + dot1 + dot2, start + dot5 * i + dot1
+                        + dot4 - dot2, start + dot5 * j + dot1 + dot4
+                        - dot2, paint);
             }
         }
 
@@ -125,7 +125,7 @@ public class DBView extends View implements Observer {
         paint.setColor(Color.BLACK);
         for (int i = 0; i < game.getHeight() + 1; i++) {
             for (int j = 0; j < game.getWidth() + 1; j++) {
-                canvas.drawCircle(start + add6 + j * add5 + 1, start + add6 + i * add5 + 1,
+                canvas.drawCircle(start + dot6 + j * dot5 + 1, start + dot6 + i * dot5 + 1,
                         radius, paint);
             }
         }
@@ -137,29 +137,32 @@ public class DBView extends View implements Observer {
         if (event.getAction() != MotionEvent.ACTION_DOWN)
             return;
 
-        float touchX = event.getX();
-        float touchY = event.getY();
+        float XClicked = event.getX();
+        float YClicked = event.getY();
         int min = Math.min(getWidth(), getHeight());
         float start = DBView.start * min;
-        float add1 = DBView.add1 * min;
-        float add2 = DBView.add2 * min;
-        float add3 = DBView.add3 * min;
-        float add5 = DBView.add5 * min;
+        float dot1 = DBView.dot1 * min;
+        float dot2 = DBView.dot2 * min;
+        float dot3 = DBView.dot3 * min;
+        float dot5 = DBView.dot5 * min;
         int d = -1, a = -1, b = -1;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                if ((start + add5 * j + add1 - add3) <= touchX
-                        && touchX <= (start + add5 * (j + 1) + add3)
-                        && touchY >= start + add5 * i + add2 - add3
-                        && touchY <= start + add5 * i + add1 - add2 + add3) {
+                final float v = start + dot5 * i + dot2 - dot3;
+                final float v1 = start + dot5 * j + dot1 - dot3;
+                final float v2 = start + dot5 * i + dot1 - dot2 + dot3;
+                if (v1 <= XClicked
+                        && XClicked <= (start + dot5 * (j + 1) + dot3)
+                        && YClicked >= v
+                        && YClicked <= v2) {
                     d = 0;
                     a = i;
                     b = j;
                 }
-                if (start + add5 * i + add2 - add3 <= touchX
-                        && touchX <= start + add5 * i + add1 - add2 + add3
-                        && touchY >= start + add5 * j + add1 - add3
-                        && touchY <= start + add5 * (j + 1) + add3) {
+                if (v <= XClicked
+                        && XClicked <= v2
+                        && YClicked >= v1
+                        && YClicked <= start + dot5 * (j + 1) + dot3) {
                     d = 1;
                     a = j;
                     b = i;
@@ -174,11 +177,7 @@ public class DBView extends View implements Observer {
             else
                 direction = LineDirection.VERTICAL;
             move = new GameState(direction, a, b);
-            try {
-                ((DBPlayer) game.currentPlayer()).add(move);
-            } catch (Exception e) {
-                Log.e("DBView", e.toString());
-            }
+            ((DBPlayer) game.currentPlayer()).add(move);
         }
     }
 

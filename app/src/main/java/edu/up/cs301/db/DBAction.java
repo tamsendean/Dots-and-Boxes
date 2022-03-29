@@ -63,11 +63,11 @@ public class DBAction extends Observable {
 		if (lineChecked(move)) {
 			return;
 		}
-		boolean newBoxChecked = tryToCheckBox(move);
+		boolean newBoxChecked = checkBox(move);
 		setLineChecked(move);
 
 		if (!newBoxChecked)
-			toNextPlayer();
+			nextPlayer();
 	}
 
 	public Player currentPlayer() {
@@ -115,11 +115,11 @@ public class DBAction extends Observable {
 		return count;
 	}
 
-	private boolean tryToCheckBox(GameState move) {
-		boolean rightChecked = tryToCheckRightBox(move);
-		boolean underChecked = tryToCheckUnderBox(move);
-		boolean upperChecked = tryToCheckUpperBox(move);
-		boolean leftChecked = tryToCheckLeftBox(move);
+	private boolean checkBox(GameState move) {
+		boolean rightChecked = checkRightBox(move);
+		boolean underChecked = checkUnderBox(move);
+		boolean upperChecked = checkUpperBox(move);
+		boolean leftChecked = checkLeftBox(move);
 		return leftChecked || rightChecked || upperChecked || underChecked;
 	}
 
@@ -138,7 +138,7 @@ public class DBAction extends Observable {
 		checked[row][column] = player;
 	}
 
-	private boolean tryToCheckUpperBox(GameState move) {
+	private boolean checkUpperBox(GameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() <= 0)
 			return false;
 		if (lineChecked(LineDirection.HORIZONTAL, move.row() - 1, move.column())
@@ -151,7 +151,7 @@ public class DBAction extends Observable {
 		}
 	}
 
-	private boolean tryToCheckUnderBox(GameState move) {
+	private boolean checkUnderBox(GameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() >= (height))
 			return false;
 		if (lineChecked(LineDirection.HORIZONTAL, move.row() + 1, move.column())
@@ -164,7 +164,7 @@ public class DBAction extends Observable {
 		}
 	}
 
-	private boolean tryToCheckLeftBox(GameState move) {
+	private boolean checkLeftBox(GameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() <= 0)
 			return false;
 		if (lineChecked(LineDirection.VERTICAL, move.row(), move.column() - 1)
@@ -177,7 +177,7 @@ public class DBAction extends Observable {
 		}
 	}
 
-	private boolean tryToCheckRightBox(GameState move) {
+	private boolean checkRightBox(GameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() >= (width))
 			return false;
 		if (lineChecked(LineDirection.VERTICAL, move.row(), move.column() + 1)
@@ -190,7 +190,7 @@ public class DBAction extends Observable {
 		}
 	}
 
-	private void toNextPlayer() {
+	private void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.length;
 	}
 

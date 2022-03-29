@@ -2,7 +2,7 @@ package edu.up.cs301.db;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
- * and allows the human player to press the '+' and '-' buttons in order to
+ * and allows the human player to press the '+' and '-' buttons gs order to
  * send moves to the game.
  * 
  * Just for fun, the GUI is implemented so that if the player presses either button
@@ -14,29 +14,30 @@ package edu.up.cs301.db;
  * @version July 2013
  */
 public class DBPlayer extends Player {
-	private final GameState[] inputBuffer = new GameState[1];
+	private final GameState[] gs = new GameState[1];
 
 	public DBPlayer(String name) {
 		super(name);
 	}
 
 	public void add(GameState line) {
-		synchronized (inputBuffer) {
-			inputBuffer[0] = line;
-			inputBuffer.notify();
+		synchronized (gs) {
+			gs[0] = line;
+			gs.notify();
 		}
 	}
 
 	private GameState getInput() {
-		synchronized (inputBuffer) {
-			if (inputBuffer[0] != null) {
-				GameState temp = inputBuffer[0];
-				inputBuffer[0] = null;
+		synchronized (gs) {
+			if (gs[0] != null) {
+				GameState temp = gs[0];
+				gs[0] = null;
 				return temp;
 			}
 			try {
-				inputBuffer.wait();
-			} catch (InterruptedException ignored) {
+				gs.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 			return this.getInput();
 		}
