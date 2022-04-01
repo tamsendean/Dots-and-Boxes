@@ -50,7 +50,10 @@ public class DBAction extends Observable {
 			player.addToGame(this);
 		}
 	}
+//move to localGame
 
+
+	
 	public void start() {
 		while (!gameOver()) {
 			addMove(currentPlayer().move());
@@ -58,7 +61,7 @@ public class DBAction extends Observable {
 			notifyObservers();
 		}
 	}
-
+//move to localGame
 	public void addMove(GameState move) {
 		if (lineChecked(move)) {
 			return;
@@ -193,6 +196,7 @@ public class DBAction extends Observable {
 	private void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.length;
 	}
+//move to localGame
 
 	protected boolean gameOver() {
 		for (int i = 0; i < getHeight(); i++) {
@@ -203,6 +207,7 @@ public class DBAction extends Observable {
 		}
 		return true;
 	}
+//move to localGame
 
 	public Player getWinner() {
 		if (!gameOver()) {

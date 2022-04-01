@@ -1,6 +1,7 @@
 package edu.up.cs301.db;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +13,7 @@ import java.util.Map;
 import edu.up.cs301.game.R;
 
 
-public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
+public class DBMainActivity extends Activity implements PlayerInfo {
 	protected DBView gameView;
 	protected TextView player1, player2, player1score, player2score;
 	Player[] players;

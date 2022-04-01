@@ -179,7 +179,7 @@ public class DBView extends View implements Observer {
             ((DBPlayer) game.currentPlayer()).add(move);
         }
     }
-
+// to local game
     @Override
     public void update(Observable observable, Object data) {
         currentPlayer.setCurrentPlayer(game.currentPlayer());

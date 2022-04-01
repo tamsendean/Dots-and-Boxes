@@ -34,7 +34,7 @@ public class DumbComputerPlayer extends Player {
 
     private void initGrid() {
         badMoves.clear();
-
+//TODO : change hardcoded values to variable
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 if (!horizontalChecked(i, j)) {
