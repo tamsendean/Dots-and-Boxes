@@ -5,6 +5,7 @@ public class GameState {
     private final int row;
     private final int column;
 
+    // this is our constructor
     public GameState(LineDirection direction, int row, int column) {
         this.direction = direction;
         this.row = row;
@@ -23,6 +24,7 @@ public class GameState {
         return column;
     }
 
+    // this ensured that the gamestate matches
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,6 +35,7 @@ public class GameState {
         return row == line.row && column == line.column && direction == line.direction;
     }
 
+    // this prints out the direction, row and colu,
     @Override
     public String toString() {
         return "direction:" + direction().toString() + "row:" + row + "column" + column;

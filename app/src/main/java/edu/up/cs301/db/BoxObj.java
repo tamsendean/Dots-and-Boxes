@@ -7,6 +7,7 @@ public class BoxObj {
 	boolean right;
 	boolean checked;
 
+	// this is our constructor for the BoxObj class
 	BoxObj(boolean t, boolean b, boolean l, boolean r) {
 		this.top = t;
 		this.bottom = b;
@@ -14,6 +15,9 @@ public class BoxObj {
 		this.right = r;
 		this.checked = (l && t && r && b);
 	}
+
+	// This is the lineCount method that counts the borders for our squares
+	// and returns the number of the final count
 	int lineCount() {
 		int count = 0;
 

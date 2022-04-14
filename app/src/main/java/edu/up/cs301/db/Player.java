@@ -8,6 +8,7 @@ public abstract class Player {
         this.name = name;
     }
 
+    //how many players are in the game
     public static int playerNum(Player player, Player[] players) {
         for (int i = 0; i < players.length; i++) {
             if (player == players[i])

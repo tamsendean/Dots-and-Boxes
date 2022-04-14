@@ -17,6 +17,7 @@ public class SmartComputerPlayer extends Player {
 	protected final ArrayList<GameState> bestMoves;
 	protected final ArrayList<GameState> badMoves;
 
+	// this is the constructor
 	public SmartComputerPlayer(String name) {
 		super(name);
 
@@ -25,6 +26,7 @@ public class SmartComputerPlayer extends Player {
 		badMoves = new ArrayList<>();
 	}
 
+	//looks for the next best move
 	protected GameState nextMove() {
 		if (bestMoves.size() != 0) return getBestLine();
 		if (safeMoves.size() != 0) return getRandomSafeLine();
@@ -32,11 +34,13 @@ public class SmartComputerPlayer extends Player {
 		return getRandomBadLine();
 	}
 
+	// interacts with the gamestate for the next move
 	public GameState move() {
 		initGrid();
 		return nextMove();
 	}
 
+	// grind of different moves to make
 	private void initGrid() {
 		bestMoves.clear();
 		badMoves.clear();
@@ -109,6 +113,7 @@ public class SmartComputerPlayer extends Player {
 		}
 	}
 
+	// return values of checking 
 	protected BoxObj getBox(int row, int column) {
 		return new BoxObj(verticalChecked(row, column), horizontalChecked(row, column),
 				verticalChecked(row, column + 1), horizontalChecked(row + 1, column));

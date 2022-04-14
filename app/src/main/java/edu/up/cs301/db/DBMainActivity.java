@@ -37,11 +37,13 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 		startGame(players);
 	}
 
+	//this starts the game
 	private void startGame(Player[] players) {
 		gameView.startGame(players);
 		updateState();
 	}
 
+	// this is a thread to update the player score
 	public void updateState() {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -52,12 +54,14 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 		});
 	}
 
+	// creates player
 	@Override
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 		updateState();
 	}
 
+	// sets the initial score of the players
 	@Override
 	public void setScore(Map<Player, Integer> playerBoxCount) {
 		playerPoints[0] = (playerBoxCount.get(players[0]));
@@ -65,6 +69,7 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 		updateState();
 	}
 
+	// this is the message window that displays who won and if they wanna play again
 	@Override
 	public void setWinner(final Player winner) {
 		runOnUiThread(new Runnable() {
@@ -87,12 +92,14 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 		});
 	}
 
+	// this is our game menu option
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.game_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	// this is the menu where we have popup messages displayed
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
@@ -108,6 +115,7 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 			});
 		}
 
+		//this exits the game
 		if (id == R.id.exit_game) {
 			runOnUiThread(new Runnable() {
 				@Override
@@ -119,6 +127,7 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 			finish();
 		}
 
+		// this loads the inital start of the game
 		if (id == R.id.load_game) {
 			runOnUiThread(new Runnable() {
 				@Override

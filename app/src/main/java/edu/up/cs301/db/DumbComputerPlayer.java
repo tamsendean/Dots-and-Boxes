@@ -12,6 +12,8 @@ import java.util.List;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
+
+// this is our dumb AI
 public class DumbComputerPlayer extends Player {
     protected final ArrayList<GameState> badMoves;
 
@@ -32,6 +34,7 @@ public class DumbComputerPlayer extends Player {
         return nextMove();
     }
 
+    //these are our different versions of potential moves to take
     private void initGrid() {
         badMoves.clear();
 //TODO : change hardcoded values to variable
@@ -96,19 +99,23 @@ public class DumbComputerPlayer extends Player {
         }
     }
 
+    //this sees if it can win the box at the moment
     protected BoxObj getBox(int row, int column) {
         return new BoxObj(verticalChecked(row, column), horizontalChecked(row, column),
                 verticalChecked(row, column + 1), horizontalChecked(row + 1, column));
     }
 
+    //this checks the horizontal lines
     protected boolean horizontalChecked(int row, int column) {
         return getGame().lineChecked(LineDirection.HORIZONTAL, row, column);
     }
 
+    // this checks the verticles lines for the boxes
     protected boolean verticalChecked(int row, int column) {
         return getGame().lineChecked(LineDirection.VERTICAL, row, column);
     }
 
+    //these 2 functions select a bad line from a random function and returns the value
     protected GameState getRandomBadLine() {
         return getRandomLine(badMoves);
     }

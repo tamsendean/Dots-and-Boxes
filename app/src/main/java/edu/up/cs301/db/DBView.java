@@ -30,6 +30,7 @@ public class DBView extends View implements Observer {
     protected Paint paint;
     protected PlayerInfo currentPlayer;
 
+    // this is the constructor for the class
     public DBView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
 
@@ -47,6 +48,7 @@ public class DBView extends View implements Observer {
                 getResources().getColor(R.color.colorP2)};
     }
 
+    //sees which player is playing
     public void setCurrentPlayer(PlayerInfo currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
@@ -63,6 +65,7 @@ public class DBView extends View implements Observer {
         postInvalidate();
     }
 
+    // this is our onDraw method which allows our surface view to be drawn
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -132,6 +135,7 @@ public class DBView extends View implements Observer {
         invalidate();
     }
 
+    //recieves info about motion events-for selecting lines
     private void receiveInput(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN)
             return;
@@ -180,6 +184,7 @@ public class DBView extends View implements Observer {
         }
     }
 // to local game
+    //this updates the local game on who the current player is and if they have won
     @Override
     public void update(Observable observable, Object data) {
         currentPlayer.setCurrentPlayer(game.currentPlayer());

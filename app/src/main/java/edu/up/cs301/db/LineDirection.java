@@ -9,6 +9,7 @@
  */
 package edu.up.cs301.db;
 
+// this is our enums class
 public enum LineDirection {
         HORIZONTAL,
         VERTICAL
