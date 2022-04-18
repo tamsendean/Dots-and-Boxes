@@ -1,7 +1,12 @@
-package edu.up.cs301.db;
+package edu.up.cs301.db.players;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.up.cs301.db.BoxObj;
+import edu.up.cs301.db.infoMessage.GameState;
+import edu.up.cs301.db.LineDirection;
+import edu.up.cs301.db.Player;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -113,7 +118,7 @@ public class SmartComputerPlayer extends Player {
 		}
 	}
 
-	// return values of checking 
+	// return values of checking
 	protected BoxObj getBox(int row, int column) {
 		return new BoxObj(verticalChecked(row, column), horizontalChecked(row, column),
 				verticalChecked(row, column + 1), horizontalChecked(row + 1, column));

@@ -1,7 +1,12 @@
-package edu.up.cs301.db;
+package edu.up.cs301.db.players;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.up.cs301.db.BoxObj;
+import edu.up.cs301.db.infoMessage.GameState;
+import edu.up.cs301.db.LineDirection;
+import edu.up.cs301.db.Player;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
