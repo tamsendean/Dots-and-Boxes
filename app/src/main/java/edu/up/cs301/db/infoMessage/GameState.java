@@ -1,4 +1,6 @@
-package edu.up.cs301.db;
+package edu.up.cs301.db.infoMessage;
+
+import edu.up.cs301.db.LineDirection;
 
 public class GameState {
     private final LineDirection direction;

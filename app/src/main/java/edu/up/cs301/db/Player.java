@@ -1,5 +1,8 @@
 package edu.up.cs301.db;
 
+import edu.up.cs301.db.ekActionMessage.DBAction;
+import edu.up.cs301.db.infoMessage.GameState;
+
 public abstract class Player {
     protected final String name;
     protected DBAction game;
