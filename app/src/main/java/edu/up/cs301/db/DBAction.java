@@ -1,4 +1,4 @@
-package edu.up.cs301.db.ekActionMessage;
+package edu.up.cs301.db;
 
 
 /**
@@ -10,10 +10,6 @@ package edu.up.cs301.db.ekActionMessage;
  */
 
 import java.util.Observable;
-
-import edu.up.cs301.db.LineDirection;
-import edu.up.cs301.db.Player;
-import edu.up.cs301.db.infoMessage.GameState;
 
 public class DBAction extends Observable {
 	private Player[] players;
