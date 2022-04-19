@@ -7,7 +7,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.db.infoMessage.GameState;
 
-public class DCompPlayer {
+public class DumbComputerPlayer {
 
     // this is our dumb AI
     public abstract class DComputerPlayer implements Player, GameComputerPlayer{
