@@ -1,15 +1,13 @@
 package edu.up.cs301;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
 import android.content.Context;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -21,7 +19,8 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.gameframework", appContext.getPackageName());
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        assertEquals("edu.up.cs301", appContext.getPackageName());
     }
 }
