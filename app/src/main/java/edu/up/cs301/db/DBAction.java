@@ -11,6 +11,8 @@ package edu.up.cs301.db;
 
 import java.util.Observable;
 
+import edu.up.cs301.GameFramework.players.Player;
+
 public class DBAction extends Observable {
 	private Player[] players;
 	private int currentPlayer;

@@ -1,8 +1,10 @@
-package edu.up.cs301.db;
+package edu.up.cs301.GameFramework.infoMessage;
 
 import java.util.Map;
 
-// seters for the current player score and if they won
+import edu.up.cs301.GameFramework.players.Player;
+
+// setters for the current player score and if they won
 public interface PlayerInfo {
     void setCurrentPlayer(Player player);
 

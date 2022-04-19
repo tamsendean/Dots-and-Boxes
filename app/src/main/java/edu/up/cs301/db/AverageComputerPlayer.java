@@ -3,6 +3,8 @@ package edu.up.cs301.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.up.cs301.GameFramework.players.Player;
+
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
  * it just sends "+" and "-" commands with equal probability, at an average

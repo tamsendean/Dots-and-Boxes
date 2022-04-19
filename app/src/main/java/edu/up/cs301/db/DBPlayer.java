@@ -1,5 +1,7 @@
 package edu.up.cs301.db;
 
+import edu.up.cs301.GameFramework.players.Player;
+
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
  * and allows the human player to press the '+' and '-' buttons gs order to

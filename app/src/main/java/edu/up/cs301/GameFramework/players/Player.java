@@ -1,4 +1,7 @@
-package edu.up.cs301.db;
+package edu.up.cs301.GameFramework.players;
+
+import edu.up.cs301.db.DBAction;
+import edu.up.cs301.db.GameState;
 
 public abstract class Player {
     protected final String name;

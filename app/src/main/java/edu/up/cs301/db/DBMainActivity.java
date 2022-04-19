@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import java.util.Map;
 
+import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
+import edu.up.cs301.GameFramework.players.Player;
 import edu.up.cs301.game.R;
 
 
@@ -127,7 +129,7 @@ public class DBMainActivity extends Activity implements PlayerInfo {
 			finish();
 		}
 
-		// this loads the inital start of the game
+		// loads the initial start of the game
 		if (id == R.id.load_game) {
 			runOnUiThread(new Runnable() {
 				@Override
