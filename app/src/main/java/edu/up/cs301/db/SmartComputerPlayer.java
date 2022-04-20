@@ -15,9 +15,9 @@ import edu.up.cs301.GameFramework.players.Player;
  * @version September 2013
  */
 public class SmartComputerPlayer extends Player {
-	protected final ArrayList<GameState> safeMoves;
-	protected final ArrayList<GameState> bestMoves;
-	protected final ArrayList<GameState> badMoves;
+	protected final ArrayList<DBGameState> safeMoves;
+	protected final ArrayList<DBGameState> bestMoves;
+	protected final ArrayList<DBGameState> badMoves;
 
 	// this is the constructor
 	public SmartComputerPlayer(String name) {
@@ -29,15 +29,15 @@ public class SmartComputerPlayer extends Player {
 	}
 
 	//looks for the next best move
-	protected GameState nextMove() {
+	protected DBGameState nextMove() {
 		if (bestMoves.size() != 0) return getBestLine();
 		if (safeMoves.size() != 0) return getRandomSafeLine();
 
 		return getRandomBadLine();
 	}
 
-	// interacts with the gamestate for the next move
-	public GameState move() {
+	// interacts with the DBGameState for the next move
+	public DBGameState move() {
 		initGrid();
 		return nextMove();
 	}
@@ -54,61 +54,61 @@ public class SmartComputerPlayer extends Player {
 					if (i == 0) {
 						switch (getBox(i, j).lineCount()) {
 							case 3:
-								bestMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								bestMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 								break;
 							case 2:
-								badMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								badMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 								break;
 							case 1:
 							case 0:
-								safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								safeMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 						}
 					} else if (i == 5) {
 						switch (getBox(i - 1, j).lineCount()) {
 							case 3:
-								bestMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								bestMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 								break;
 							case 2:
-								badMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								badMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 								break;
 							case 1:
 							case 0:
-								safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+								safeMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 						}
 					} else {
 						if (getBox(i, j).lineCount() == 3
 								|| getBox(i - 1, j).lineCount() == 3)
-							bestMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+							bestMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 
 						if (getBox(i, j).lineCount() == 2
 								|| getBox(i - 1, j).lineCount() == 2)
-							badMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+							badMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 
 						if (getBox(i, j).lineCount() < 2
 								&& getBox(i - 1, j).lineCount() < 2)
-							safeMoves.add(new GameState(LineDirection.HORIZONTAL, i, j));
+							safeMoves.add(new DBGameState(LineDirection.HORIZONTAL, i, j));
 					}
 				}
 
 				if (!verticalChecked(j, i)) {
 					if (i == 0) {
 						if (getBox(j, i).lineCount() == 3)
-							bestMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+							bestMoves.add(new DBGameState(LineDirection.VERTICAL, j, i));
 					} else if (i == 5) {
 						if (getBox(j, i - 1).lineCount() == 3)
-							bestMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+							bestMoves.add(new DBGameState(LineDirection.VERTICAL, j, i));
 					} else {
 						if (getBox(j, i).lineCount() == 3
 								|| getBox(j, i - 1).lineCount() == 3)
-							bestMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+							bestMoves.add(new DBGameState(LineDirection.VERTICAL, j, i));
 
 						if (getBox(j, i).lineCount() == 2
 								|| getBox(j, i - 1).lineCount() == 2)
-							badMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+							badMoves.add(new DBGameState(LineDirection.VERTICAL, j, i));
 
 						if (getBox(j, i).lineCount() < 2
 								&& getBox(j, i - 1).lineCount() < 2)
-							safeMoves.add(new GameState(LineDirection.VERTICAL, j, i));
+							safeMoves.add(new DBGameState(LineDirection.VERTICAL, j, i));
 					}
 				}
 			}
@@ -129,19 +129,19 @@ public class SmartComputerPlayer extends Player {
 		return getGame().lineChecked(LineDirection.VERTICAL, row, column);
 	}
 
-	protected GameState getBestLine() {
+	protected DBGameState getBestLine() {
 		return bestMoves.get(0);
 	}
 
-	protected GameState getRandomSafeLine() {
+	protected DBGameState getRandomSafeLine() {
 		return getRandomLine(safeMoves);
 	}
 
-	protected GameState getRandomBadLine() {
+	protected DBGameState getRandomBadLine() {
 		return getRandomLine(badMoves);
 	}
 
-	private GameState getRandomLine(List<GameState> list) {
+	private DBGameState getRandomLine(List<DBGameState> list) {
 		return list.get((int) (list.size() * Math.random()));
 	}
 }

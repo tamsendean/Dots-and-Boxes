@@ -1,11 +1,11 @@
 package edu.up.cs301.GameFramework.players;
 
-import edu.up.cs301.db.DBAction;
-import edu.up.cs301.db.GameState;
+import edu.up.cs301.db.DBLocalGame;
+import edu.up.cs301.db.DBGameState;
 
 public abstract class Player {
     protected final String name;
-    protected DBAction game;
+    protected DBLocalGame game;
 
     public Player(String name) {
         this.name = name;
@@ -20,13 +20,13 @@ public abstract class Player {
         return -1;
     }
 
-    public abstract GameState move();
+    public abstract DBGameState move();
 
-    public DBAction getGame() {
+    public DBLocalGame getGame() {
         return game;
     }
 
-    public void addToGame(DBAction game) {
+    public void addToGame(DBLocalGame game) {
         this.game = game;
     }
 

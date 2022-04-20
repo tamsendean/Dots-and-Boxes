@@ -16,23 +16,23 @@ import edu.up.cs301.GameFramework.players.Player;
  * @version July 2013
  */
 public class DBPlayer extends Player {
-	private final GameState[] gs = new GameState[1];
+	private final DBGameState[] gs = new DBGameState[1];
 
 	public DBPlayer(String name) {
 		super(name);
 	}
 
-	public void add(GameState line) {
+	public void add(DBGameState line) {
 		synchronized (gs) {
 			gs[0] = line;
 			gs.notify();
 		}
 	}
 
-	private GameState getInput() {
+	private DBGameState getInput() {
 		synchronized (gs) {
 			if (gs[0] != null) {
-				GameState temp = gs[0];
+				DBGameState temp = gs[0];
 				gs[0] = null;
 				return temp;
 			}
@@ -46,7 +46,7 @@ public class DBPlayer extends Player {
 	}
 
 	@Override
-	public GameState move() {
+	public DBGameState move() {
 		return getInput();
 	}
 }

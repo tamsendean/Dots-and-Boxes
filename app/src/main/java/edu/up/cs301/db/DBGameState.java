@@ -1,12 +1,14 @@
 package edu.up.cs301.db;
 
-public class GameState {
+import edu.up.cs301.GameFramework.infoMessage.GameState;
+
+public class DBGameState extends GameState {
     private final LineDirection direction;
     private final int row;
     private final int column;
 
     // constructor
-    public GameState(LineDirection direction, int row, int column) {
+    public DBGameState(LineDirection direction, int row, int column) {
         this.direction = direction;
         this.row = row;
         this.column = column;

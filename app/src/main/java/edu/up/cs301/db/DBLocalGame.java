@@ -9,11 +9,11 @@ package edu.up.cs301.db;
  * @version July 2013
  */
 
-import java.util.Observable;
 
+import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.players.Player;
 
-public class DBAction extends Observable {
+public class DBLocalGame extends LocalGame {
 	private Player[] players;
 	private int currentPlayer;
 	private int width;
@@ -22,7 +22,7 @@ public class DBAction extends Observable {
 	private int[][] horizontal;
 	private int[][] vertical;
 
-	public DBAction(int width, int height, Player[] players) {
+	public DBLocalGame(int width, int height, Player[] players) {
 		this.width = width;
 		this.height = height;
 		this.players = players;
@@ -34,6 +34,7 @@ public class DBAction extends Observable {
 		addPlayers(players);
 		currentPlayer = 0;
 	}
+
 
 	public Player[] getPlayers() {
 		return players;
@@ -52,19 +53,8 @@ public class DBAction extends Observable {
 			player.addToGame(this);
 		}
 	}
-//move to localGame
 
-
-	
-	public void start() {
-		while (!gameOver()) {
-			addMove(currentPlayer().move());
-			setChanged();
-			notifyObservers();
-		}
-	}
-//move to localGame
-	public void addMove(GameState move) {
+	public void addMove(DBGameState move) {
 		if (lineChecked(move)) {
 			return;
 		}
@@ -80,10 +70,10 @@ public class DBAction extends Observable {
 	}
 
 	public boolean lineChecked(LineDirection direction, int row, int column) {
-		return lineChecked(new GameState(direction, row, column));
+		return lineChecked(new DBGameState(direction, row, column));
 	}
 // checks which line is selected and throws an exception if not a valid move
-	public boolean lineChecked(GameState line) {
+	public boolean lineChecked(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
 				return (horizontal[line.row()][line.column()] == 1
@@ -95,7 +85,7 @@ public class DBAction extends Observable {
 		throw new IllegalArgumentException(line.direction().toString());
 	}
 // this is a method for the player selecting their chosen line
-	public int getPlayerLine(GameState line) {
+	public int getPlayerLine(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
 				return horizontal[line.row()][line.column()];
@@ -123,7 +113,7 @@ public class DBAction extends Observable {
 	}
 
 	// this method checks the box to see if it's finished/ made
-	private boolean checkBox(GameState move) {
+	private boolean checkBox(DBGameState move) {
 		boolean rightChecked = checkRightBox(move);
 		boolean underChecked = checkUnderBox(move);
 		boolean upperChecked = checkUpperBox(move);
@@ -131,7 +121,7 @@ public class DBAction extends Observable {
 		return leftChecked || rightChecked || upperChecked || underChecked;
 	}
 
-	private void setLineChecked(GameState line) {
+	private void setLineChecked(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
 				horizontal[line.row()][line.column()] = currentPlayer + 1;
@@ -147,7 +137,7 @@ public class DBAction extends Observable {
 	}
 
 	//check to see if the upper line of the box is selected
-	private boolean checkUpperBox(GameState move) {
+	private boolean checkUpperBox(DBGameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() <= 0)
 			return false;
 		if (lineChecked(LineDirection.HORIZONTAL, move.row() - 1, move.column())
@@ -161,7 +151,7 @@ public class DBAction extends Observable {
 	}
 
 	// check to see if the line on the bottom of the box is selected
-	private boolean checkUnderBox(GameState move) {
+	private boolean checkUnderBox(DBGameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() >= (height))
 			return false;
 		if (lineChecked(LineDirection.HORIZONTAL, move.row() + 1, move.column())
@@ -175,7 +165,7 @@ public class DBAction extends Observable {
 	}
 
 	//check if the left line is selected
-	private boolean checkLeftBox(GameState move) {
+	private boolean checkLeftBox(DBGameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() <= 0)
 			return false;
 		if (lineChecked(LineDirection.VERTICAL, move.row(), move.column() - 1)
@@ -189,7 +179,7 @@ public class DBAction extends Observable {
 	}
 
 	//check to see if the right line is selected
-	private boolean checkRightBox(GameState move) {
+	private boolean checkRightBox(DBGameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() >= (width))
 			return false;
 		if (lineChecked(LineDirection.VERTICAL, move.row(), move.column() + 1)
@@ -236,4 +226,14 @@ public class DBAction extends Observable {
 		else
 			return players[1];
 	}
+
+	@Override
+	public void start() {
+		while (!gameOver()) {
+			addMove(currentPlayer().move());
+			setChanged();
+			notifyObservers();
+		}
+	}
+
 }

@@ -296,7 +296,7 @@ public abstract class GameMainActivity extends Activity implements
         // until further down so that we do not attempt to make the
         // network connection until other errors are checked)
         if (config.isLocal()) { // local game
-            game = createLocalGame(gameState);
+            game = (Game) createLocalGame(gameState);
             // verify we have a game
             if (game == null) {
                 return Resources.getSystem().getString(R.string.Game_Creation_Error_Msg);

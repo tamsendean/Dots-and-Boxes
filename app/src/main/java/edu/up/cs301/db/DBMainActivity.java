@@ -34,7 +34,7 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		player1score = (TextView) findViewById(R.id.player1score);
 		player2score = (TextView) findViewById(R.id.player2score);
 
-		players = new Player[]{new DBPlayer("Human"), new AverageComputerPlayer("Computer")};
+		players = new Player[]{new DBPlayer("Human"), new DBPlayer("Human")};
 		startGame(players);
 	}
 

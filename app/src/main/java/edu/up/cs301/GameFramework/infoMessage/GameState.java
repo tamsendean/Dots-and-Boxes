@@ -2,6 +2,8 @@ package edu.up.cs301.GameFramework.infoMessage;
 
 import static edu.up.cs301.GameFramework.utilities.Saving.SEPARATOR;
 
+import edu.up.cs301.db.LineDirection;
+
 /**
  * The state of the game. This class should be subclassed so that it holds
  * all state information for the particular game being implemented. For
@@ -22,6 +24,9 @@ public class GameState extends GameInfo {
 
     //How many setup turns have passed, initially set to 0
     protected int currentSetupTurn = 0;
+    public LineDirection direction;
+    public int row;
+    public int column;
 
     /**
      * getNumSetupTurns
@@ -29,6 +34,10 @@ public class GameState extends GameInfo {
      * @return Number of Setup turns in game
      */
     public int getNumSetupTurns(){ return numSetupTurns; }
+
+    public boolean equals(Object o) {
+        return false;
+    }
 
     /**
      * getCurrentSetupTurn

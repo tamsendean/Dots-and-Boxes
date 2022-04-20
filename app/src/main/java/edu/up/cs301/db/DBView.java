@@ -27,8 +27,8 @@ public class DBView extends View implements Observer {
     protected static final float dotsPos = (float) 0.01;
 
     protected final int[] playerColors;
-    protected DBAction game;
-    protected GameState move;
+    protected DBLocalGame game;
+    protected DBGameState move;
     protected Paint paint;
     protected PlayerInfo currentPlayer;
 
@@ -56,7 +56,7 @@ public class DBView extends View implements Observer {
     }
 
     public void startGame(Player[] players) {
-        game = new DBAction(5, 5, players);
+        game = new DBLocalGame(5, 5, players);
         game.addObserver(this);
         new Thread() {
             @Override
@@ -85,7 +85,7 @@ public class DBView extends View implements Observer {
         //paint lines
         for (int i = 0; i < game.getHeight() + 1; i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                GameState horizontal = new GameState(LineDirection.HORIZONTAL, i, j);
+                DBGameState horizontal = new DBGameState(LineDirection.HORIZONTAL, i, j);
                 if (game.lineChecked(horizontal)) {
                     if (game.getPlayerLine(horizontal) == 1)
                         paint.setColor(playerColors[0]);
@@ -99,7 +99,7 @@ public class DBView extends View implements Observer {
                 canvas.drawRect(start + gridSize * j + lineWidth, start + gridSize * i
                         + fillSize, start + gridSize * (j + 1), bottom, paint);
 
-                GameState vertical = new GameState(LineDirection.VERTICAL, j, i);
+                DBGameState vertical = new DBGameState(LineDirection.VERTICAL, j, i);
                 if (game.lineChecked(vertical)) {
                     if (game.getPlayerLine(vertical) == 1)
                         paint.setColor(playerColors[0]);
@@ -137,7 +137,7 @@ public class DBView extends View implements Observer {
         invalidate();
     }
 
-    //recieves info about motion events-for selecting lines
+    //receives info about motion events-for selecting lines
     private void receiveInput(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN)
             return;
@@ -181,7 +181,7 @@ public class DBView extends View implements Observer {
                 direction = LineDirection.HORIZONTAL;
             else
                 direction = LineDirection.VERTICAL;
-            move = new GameState(direction, y, z);
+            move = new DBGameState(direction, y, z);
             ((DBPlayer) game.currentPlayer()).add(move);
         }
     }
