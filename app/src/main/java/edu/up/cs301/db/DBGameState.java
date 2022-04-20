@@ -2,6 +2,16 @@ package edu.up.cs301.db;
 
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
+/**
+ * GameState class for the Dots and Boxes Game
+ *
+ * @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
+ */
+
 public class DBGameState extends GameState {
     private final LineDirection direction;
     private final int row;
@@ -39,6 +49,6 @@ public class DBGameState extends GameState {
 
     @Override
     public String toString() {
-        return "direction:" + direction().toString() + "row:" + row + "column" + column;
+        return "direction: " + direction().toString() + ", row: " + row + ", column: " + column;
     }
 }
