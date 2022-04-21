@@ -1,5 +1,6 @@
 package edu.up.cs301.db;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
 import edu.up.cs301.GameFramework.players.Player;
+import edu.up.cs301.GameFramework.utilities.MainMenu;
 import edu.up.cs301.game.R;
 
 
@@ -34,8 +36,60 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		player1score = (TextView) findViewById(R.id.player1score);
 		player2score = (TextView) findViewById(R.id.player2score);
 
-		players = new Player[]{new DBPlayer("Human"), new DBPlayer("Human")};
-		startGame(players);
+		Bundle b = getIntent().getExtras();
+		int id = b.getInt("id");
+		if (id == 0) {
+			players = new Player[]{new DBPlayer("Human 1"), new DBPlayer("Human 2")};
+			startGame(players);
+		}
+		if (id == 01) {
+			players = new Player[]{new DBPlayer("Human"),
+					new DumbComputerPlayer("Computer")};
+			startGame(players);
+
+			player1.setText("Human");
+			player2.setText("Computer");
+		}
+		if (id == 10) {
+			players = new Player[]{new DumbComputerPlayer("Computer"),
+					new DBPlayer("Human")};
+			startGame(players);
+
+			player1.setText("Computer");
+			player2.setText("Human");
+		}
+		if (id == 02) {
+			players = new Player[]{new DBPlayer("Human"),
+					new AverageComputerPlayer("Computer")};
+			startGame(players);
+
+			player1.setText("Human");
+			player2.setText("Computer");
+		}
+		if (id == 20) {
+			players = new Player[]{new AverageComputerPlayer("Computer"),
+					new DBPlayer("Human")};
+			startGame(players);
+
+			player1.setText("Computer");
+			player2.setText("Human");
+		}
+		if (id == 03) {
+			players = new Player[]{new DBPlayer("Human"),
+					new SmartComputerPlayer("Computer")};
+			startGame(players);
+
+			player1.setText("Human");
+			player2.setText("Computer");
+		}
+		if (id == 30) {
+			players = new Player[]{new SmartComputerPlayer("Computer"),
+					new DBPlayer("Human")};
+			startGame(players);
+
+			player1.setText("Computer");
+			player2.setText("Human");
+		}
 	}
 
 	//this starts the game
@@ -129,101 +183,10 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		}
 
 		// loads the initial start of the game
-		if (id == R.id.load_game) {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					new AlertDialog.Builder(DBMainActivity.this)
-							.setTitle("Dots And Boxes")
-							.setMessage("New Game Against: ")
-							.setPositiveButton("Dumb Computer", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									new AlertDialog.Builder(DBMainActivity.this)
-											.setTitle("Select Player 1: ")
-											.setPositiveButton("Computer", new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialogInterface, int i) {
-													players = new Player[]{new DumbComputerPlayer("Computer"),
-															new DBPlayer("Human")};
-													startGame(players);
-
-													player1.setText("Computer");
-													player2.setText("Human");
-												}
-											})
-											.setNegativeButton("Human", new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialogInterface, int i) {
-													players = new Player[]{new DBPlayer("Human"),
-															new DumbComputerPlayer("Computer")};
-													startGame(players);
-
-													player1.setText("Human");
-													player2.setText("Computer");
-												}
-											}).show();
-								}
-							})
-							.setNeutralButton("Smart Computer", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialogInterface, int i) {
-											new AlertDialog.Builder(DBMainActivity.this)
-													.setTitle("Select First Player: ")
-													.setPositiveButton("Computer", new DialogInterface.OnClickListener() {
-														@Override
-														public void onClick(DialogInterface dialogInterface, int i) {
-															players = new Player[]{new SmartComputerPlayer("Computer"),
-																	new DBPlayer("Human")};
-															startGame(players);
-
-															player1.setText("Computer");
-															player2.setText("Human");
-														}
-													})
-													.setNegativeButton("Human", new DialogInterface.OnClickListener() {
-														@Override
-														public void onClick(DialogInterface dialogInterface, int i) {
-															players = new Player[]{new DBPlayer("Human"),
-																	new SmartComputerPlayer("Computer")};
-															startGame(players);
-
-															player1.setText("Human");
-															player2.setText("Computer");
-														}
-													}).show();
-										}
-									})
-							.setNegativeButton("Average Computer", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialogInterface, int i) {
-									new AlertDialog.Builder(DBMainActivity.this)
-											.setTitle("Select First Player: ")
-											.setPositiveButton("Computer", new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialogInterface, int i) {
-													players = new Player[]{new AverageComputerPlayer("Computer"),
-															new DBPlayer("Human")};
-													startGame(players);
-
-													player1.setText("Computer");
-													player2.setText("Human");
-												}
-											})
-											.setNegativeButton("Human", new DialogInterface.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialogInterface, int i) {
-													players = new Player[]{new DBPlayer("Human"),
-															new AverageComputerPlayer("Computer")};
-													startGame(players);
-
-													player1.setText("Human");
-													player2.setText("Computer");
-												}
-											}).show();
-								}
-							}).show();
-				}
-			});
+		if (id == R.id.menu_main) {
+			Intent i = new Intent(DBMainActivity.this, MainMenu.class);
+			setContentView(R.layout.main_menu);
+			startActivity(i);
 		}
 
 		return super.onOptionsItemSelected(item);

@@ -2,8 +2,8 @@
     <item android:id="@+id/menu_help"
         android:title="@string/menu_help"
         android:orderInCategory="100"/>
-    <item android:id="@+id/load_game"
-        android:title="@string/load_game"
+    <item android:id="@+id/menu_main"
+        android:title="@string/main_menu"
         android:orderInCategory="100"/>
     <item android:id="@+id/exit_game"
         android:title="Exit Game"

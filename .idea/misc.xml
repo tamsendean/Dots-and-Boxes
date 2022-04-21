@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/layout/game_player_list_row.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/game_remote_tab.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/game_settings_tab.xml" value="0.17083333333333334" />
+        <entry key="app/src/main/res/layout/main_menu.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="1.24375" />
       </map>
     </option>
   </component>

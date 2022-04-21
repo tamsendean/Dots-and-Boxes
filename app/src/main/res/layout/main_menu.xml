@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_gravity="center"
+    tools:context="edu.up.cs301.db.DBMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="350dp"
+            android:paddingBottom="20dp"
+            android:src="@drawable/db_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="New game against: "
+            android:textColor="?android:attr/colorForeground"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/humanBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Human" />
+
+        <Button
+            android:id="@+id/dumbBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Dumb AI" />
+
+        <Button
+            android:id="@+id/avgBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Average AI" />
+
+        <Button
+            android:id="@+id/smartBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Smart AI" />
+
+    </LinearLayout>
+
+</RelativeLayout>

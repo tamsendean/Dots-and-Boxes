@@ -525,10 +525,6 @@ public abstract class GameMainActivity extends Activity implements
             case R.id.menu_help:
                 Logger.log(TAG, "This is the help button!");
                 return true;
-            case R.id.load_game:
-                Logger.log(TAG, "This is the loading button!");
-                MessageBox.popUpLoadGame("Select Your Game: ", this);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
