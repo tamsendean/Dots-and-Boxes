@@ -14,6 +14,7 @@ import edu.up.cs301.GameFramework.players.Player;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
+
 public class SmartComputerPlayer extends Player {
 	protected final ArrayList<DBGameState> safeMoves;
 	protected final ArrayList<DBGameState> bestMoves;

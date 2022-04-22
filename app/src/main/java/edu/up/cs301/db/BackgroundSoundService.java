@@ -18,7 +18,7 @@ public class BackgroundSoundService extends Service {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
-        player = MediaPlayer.create(this, R.raw.elevator);
+        player = MediaPlayer.create(this, R.raw.song);
         player.setLooping(true); // Set looping
         player.setVolume(100,100);
         player.start();
