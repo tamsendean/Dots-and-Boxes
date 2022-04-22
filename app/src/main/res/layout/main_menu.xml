@@ -81,6 +81,13 @@
                 android:text="Smart AI" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="PlayBackgroundSound"
+            android:text="Play Video " />
+
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="match_parent"

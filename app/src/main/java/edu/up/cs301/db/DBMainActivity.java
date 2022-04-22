@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -31,6 +32,7 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Player currentPlayer;
 	VideoView videov;
 	MediaController mediaC;
+	Button clk;
 
 
 	@Override
@@ -42,9 +44,11 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		Intent svc=new Intent(this, BackgroundSoundService.class);
 		startService(svc);
 
-		//this is the video id
+
+		clk = (Button) findViewById(R.id.playButton);
 		videov = (VideoView) findViewById(R.id.videoView);
 		mediaC = new MediaController(this);
+
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -110,15 +114,6 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		}
 	}
 
-	// this plays the video with media controlls
-	public void videoplay(View v){
-		String videopath = "android.resource://edu.up.cs301.db/"+ R.raw.dbvideo;
-		Uri uri = Uri.parse(videopath);
-		videov.setVideoURI(uri);
-		videov.setMediaController(mediaC);
-		mediaC.setAnchorView(videov);
-		videov.start();
-	}
 
 	//this starts the game
 	private void startGame(Player[] players) {
@@ -193,7 +188,9 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 				public void run() {
 					new AlertDialog.Builder(DBMainActivity.this)
 							.setTitle("Dots And Boxes Rules")
-							.setMessage("Click on a line to move. When a box of lines is formed by a player, the player receives a point and they may go again.").show();
+							.setMessage("Click on a line to move. When a box of lines is formed " +
+									"by a player, the player receives a point and they" +
+									" may go again.").show();
 				}
 			});
 		}
@@ -219,4 +216,16 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 
 		return super.onOptionsItemSelected(item);
 			}
-		}
+
+
+	// this plays the video with media controlls
+	public void videoplay(View v){
+		String videopath = "android.resource://edu.up.cs301.db/"+ R.raw.dbvideo;
+		Uri uri = Uri.parse(videopath);
+		videov.setVideoURI(uri);
+		videov.setMediaController(mediaC);
+		mediaC.setAnchorView(videov);
+		videov.start();
+	}
+
+}
