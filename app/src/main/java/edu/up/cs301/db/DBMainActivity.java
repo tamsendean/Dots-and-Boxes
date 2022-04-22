@@ -1,6 +1,9 @@
 package edu.up.cs301.db;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -27,6 +30,9 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		Intent svc=new Intent(this, BackgroundSoundService.class);
+		startService(svc);
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
