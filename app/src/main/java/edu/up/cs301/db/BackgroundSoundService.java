@@ -28,7 +28,6 @@ public class BackgroundSoundService extends Service {
         super.onStart(intent, startId);
     }
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
 
     }

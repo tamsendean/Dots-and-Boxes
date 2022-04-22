@@ -10,7 +10,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
+
 import java.util.Map;
 
 import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
@@ -25,14 +29,22 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Player[] players;
 	Integer[] playerPoints = new Integer[]{0, 0};
 	Player currentPlayer;
+	VideoView videov;
+	MediaController mediaC;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		// this is to start the background sound
 		Intent svc=new Intent(this, BackgroundSoundService.class);
 		startService(svc);
+
+		//this is the video id
+		videov = (VideoView) findViewById(R.id.videoView);
+		mediaC = new MediaController(this);
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -96,6 +108,16 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 			player1.setText("Computer");
 			player2.setText("Human");
 		}
+	}
+
+	// this plays the video with media controlls
+	public void videoplay(View v){
+		String videopath = "android.resource://edu.up.cs301.db/"+ R.raw.dbvideo;
+		Uri uri = Uri.parse(videopath);
+		videov.setVideoURI(uri);
+		videov.setMediaController(mediaC);
+		mediaC.setAnchorView(videov);
+		videov.start();
 	}
 
 	//this starts the game
