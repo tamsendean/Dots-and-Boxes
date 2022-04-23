@@ -23,6 +23,7 @@
         <activity
             android:name="edu.up.cs301.db.DBMainActivity"
             android:label="Dots and Boxes" />
+            <service android:name="edu.up.cs301.db.BackgroundSoundService"/>
 
     </application>
 

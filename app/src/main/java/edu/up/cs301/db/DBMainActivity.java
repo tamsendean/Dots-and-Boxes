@@ -2,7 +2,6 @@ package edu.up.cs301.db;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,11 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import java.util.Map;
 
@@ -30,9 +25,8 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Player[] players;
 	Integer[] playerPoints = new Integer[]{0, 0};
 	Player currentPlayer;
-	VideoView videov;
-	MediaController mediaC;
-	Button clk;
+	MediaPlayer mediaPlayer;
+
 
 
 	@Override
@@ -40,15 +34,8 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// this is to start the background sound
-		Intent svc=new Intent(this, BackgroundSoundService.class);
-		startService(svc);
-
-
-		clk = (Button) findViewById(R.id.playButton);
-		videov = (VideoView) findViewById(R.id.videoView);
-		mediaC = new MediaController(this);
-
+		mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.song);
+		mediaPlayer.start();
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -114,6 +101,14 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		}
 	}
 
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		mediaPlayer.stop();
+		mediaPlayer.release();
+
+	}
 
 	//this starts the game
 	private void startGame(Player[] players) {
@@ -218,14 +213,6 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 			}
 
 
-	// this plays the video with media controlls
-	public void videoplay(View v){
-		String videopath = "android.resource://edu.up.cs301.db/"+ R.raw.dbvideo;
-		Uri uri = Uri.parse(videopath);
-		videov.setVideoURI(uri);
-		videov.setMediaController(mediaC);
-		mediaC.setAnchorView(videov);
-		videov.start();
-	}
+
 
 }

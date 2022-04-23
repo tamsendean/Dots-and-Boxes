@@ -24,7 +24,6 @@ public class BackgroundSoundService extends Service {
     }
     public int onStartCommand(Intent intent, int flags, int startId) {
         mediaPlayer.start();
-
         return startId;
     }
     public void onStart(Intent intent, int startId) {
