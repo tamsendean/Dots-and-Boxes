@@ -30,14 +30,12 @@ public class BackgroundSoundService extends Service {
     }
     @Override
     public void onDestroy() {
-<<<<<<< HEAD
+
         mediaPlayer.stop();
         mediaPlayer.release();
-=======
         // TODO Auto-generated method stub
         super.onDestroy();
 
->>>>>>> parent of 4520c2a (added in the the video to the main screen)
     }
     @Override
     public void onLowMemory() {

@@ -10,10 +10,7 @@ import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 4520c2a (added in the the video to the main screen)
 import java.util.Map;
 
 import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
@@ -28,25 +25,19 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Player[] players;
 	Integer[] playerPoints = new Integer[]{0, 0};
 	Player currentPlayer;
-<<<<<<< HEAD
 	MediaPlayer mediaPlayer;
 
-
-=======
->>>>>>> parent of 4520c2a (added in the the video to the main screen)
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
 		mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.song);
 		mediaPlayer.start();
-=======
+
 		Intent svc=new Intent(this, BackgroundSoundService.class);
 		startService(svc);
->>>>>>> parent of 4520c2a (added in the the video to the main screen)
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -112,7 +103,6 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		}
 	}
 
-<<<<<<< HEAD
 
 	@Override
 	protected void onPause() {
@@ -122,8 +112,6 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 
 	}
 
-=======
->>>>>>> parent of 4520c2a (added in the the video to the main screen)
 	//this starts the game
 	private void startGame(Player[] players) {
 		gameView.startGame(players);
