@@ -29,69 +29,45 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/humanBtn"
-                style="@android:style/Widget.DeviceDefault.Light.Button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:text="Human" />
-
-            <Button
-                android:id="@+id/dumbBtn"
-                style="@android:style/Widget.DeviceDefault.Light.Button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:text="Dumb AI" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/avgBtn"
-                style="@android:style/Widget.DeviceDefault.Light.Button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:text="Average AI" />
-
-            <Button
-                android:id="@+id/smartBtn"
-                style="@android:style/Widget.DeviceDefault.Light.Button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:text="Smart AI" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/humanBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Human" />
 
         <Button
-            android:id="@+id/playButton"
-            android:layout_width="match_parent"
+            android:id="@+id/dumbBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:onClick="videoplay"
-            android:text="Play Video " />
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Dumb AI" />
 
-        <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/avgBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Average AI" />
+
+        <Button
+            android:id="@+id/smartBtn"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Smart AI" />
 
     </LinearLayout>
 
