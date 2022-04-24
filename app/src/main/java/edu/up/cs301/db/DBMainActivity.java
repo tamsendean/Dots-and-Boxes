@@ -1,6 +1,7 @@
 package edu.up.cs301.db;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -17,6 +18,7 @@ import edu.up.cs301.game.R;
 
 
 public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
+	MediaPlayer mediaPlayer;
 	protected DBView gameView;
 	protected TextView player1, player2, player1score, player2score;
 	Player[] players;
@@ -27,6 +29,10 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.song);
+
+		mediaPlayer.start();
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -191,4 +197,11 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 
 		return super.onOptionsItemSelected(item);
 			}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		mediaPlayer.stop();
+		mediaPlayer.release();
+
+	}
 		}
