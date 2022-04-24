@@ -1,8 +1,6 @@
 package edu.up.cs301.db;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -10,7 +8,6 @@ import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import java.util.Map;
 
 import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
@@ -25,19 +22,11 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Player[] players;
 	Integer[] playerPoints = new Integer[]{0, 0};
 	Player currentPlayer;
-	MediaPlayer mediaPlayer;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.song);
-		mediaPlayer.start();
-
-		Intent svc=new Intent(this, BackgroundSoundService.class);
-		startService(svc);
 
 		gameView = (DBView) findViewById(R.id.gameView);
 		gameView.setCurrentPlayer(this);
@@ -101,15 +90,6 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 			player1.setText("Computer");
 			player2.setText("Human");
 		}
-	}
-
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mediaPlayer.stop();
-		mediaPlayer.release();
-
 	}
 
 	//this starts the game
@@ -185,9 +165,7 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 				public void run() {
 					new AlertDialog.Builder(DBMainActivity.this)
 							.setTitle("Dots And Boxes Rules")
-							.setMessage("Click on a line to move. When a box of lines is formed " +
-									"by a player, the player receives a point and they" +
-									" may go again.").show();
+							.setMessage("Click on a line to move. When a box of lines is formed by a player, the player receives a point and they may go again.").show();
 				}
 			});
 		}
@@ -213,8 +191,4 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 
 		return super.onOptionsItemSelected(item);
 			}
-
-
-
-
-}
+		}
