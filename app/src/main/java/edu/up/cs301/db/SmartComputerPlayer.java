@@ -6,15 +6,28 @@ import java.util.List;
 import edu.up.cs301.GameFramework.players.Player;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second. 
- * 
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version September 2013
+ * SmartComputerPlayer- This is the super computer player class.
+ * This is the hardest computer player and strategically plays
+ * against the human player based on the best coded algorithms
+ * compared to the worst.
+ *
+ * @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
  */
+
 public class SmartComputerPlayer extends Player {
+	/**
+	 External Citation
+	 Date: 24 March, 2022
+	 Problem: Trying to implement a smart AI algorithm that accounts for each game state
+	 Resource:
+	 https://www.geeksforgeeks.org/three-way-partioning-using-dutch-national-sort-algorithmswitch-case-version-in-java/
+	 Solution: I used a form of the Dutch National Sort Algorithm to create the AI: partition the possible moves into
+	 three array lists, and sort them from best to worst given the cases, always returning the best move.
+	 */
 	protected final ArrayList<DBGameState> safeMoves;
 	protected final ArrayList<DBGameState> bestMoves;
 	protected final ArrayList<DBGameState> badMoves;

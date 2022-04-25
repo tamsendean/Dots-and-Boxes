@@ -16,6 +16,11 @@ import edu.up.cs301.GameFramework.players.Player;
  * @version Spring 2022
  */
 public class AverageComputerPlayer extends Player {
+    /**
+     External Citation
+     Date: 24 March, 2022
+     Problem: See SmartComputerPlayer
+     */
     protected final ArrayList<DBGameState> safeMoves;
     protected final ArrayList<DBGameState> badMoves;
 

@@ -16,8 +16,27 @@ import edu.up.cs301.GameFramework.players.Player;
 import edu.up.cs301.GameFramework.utilities.MainMenu;
 import edu.up.cs301.game.R;
 
+/**
+ *  DBMainActivity-hosts the game and allows for the selection of player types locally.
+ *  This class interacts with the Local Game.
+ *
+ *  @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
+ */
 
 public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
+	/**
+	 External Citation
+	 Date: 22 April, 2022
+	 Problem: Didn't know how to add in sound to the
+	 background of the app.
+	 Resource:
+	 https://www.tutorialspoint.com/how-to-play-background- music-in-android-app
+	 Solution: I used the example code from this post.
+	 */
 	MediaPlayer mediaPlayer;
 	protected DBView gameView;
 	protected TextView player1, player2, player1score, player2score;

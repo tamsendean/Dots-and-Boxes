@@ -1,14 +1,15 @@
 package edu.up.cs301.db;
 
-
 /**
- * This contains the state for the Counter game. The state consist of simply
- * the value of the counter.
+ * DBLocalGame- the local game that determines the legality of moves
+ * from the various players and changes the gameState accordingly.
  *
- * @author Steven R. Vegdahl
- * @version July 2013
+ *  @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
  */
-
 
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.players.Player;

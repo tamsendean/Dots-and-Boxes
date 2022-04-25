@@ -5,17 +5,23 @@ import java.util.List;
 
 import edu.up.cs301.GameFramework.players.Player;
 
-/**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second.
+/**DumbComputerPlayer- this class has the Dumb Computer
+ * Player that plays the worst move based on the
+ * implemented algorithms and has little to no strategy.
  *
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version September 2013
+ *  @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
  */
 
 public class DumbComputerPlayer extends Player {
+    /**
+     External Citation
+     Date: 24 March, 2022
+     Problem: See SmartComputerPlayer
+     */
     protected final ArrayList<DBGameState> badMoves;
 
     public DumbComputerPlayer(String name) {

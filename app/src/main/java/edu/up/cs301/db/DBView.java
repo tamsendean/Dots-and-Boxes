@@ -16,6 +16,17 @@ import edu.up.cs301.GameFramework.infoMessage.PlayerInfo;
 import edu.up.cs301.GameFramework.players.Player;
 import edu.up.cs301.game.R;
 
+/**
+ * DBView- this class draws our board and other features and interacts
+ * with the DB Main Activity class.
+ *
+ * @author Audrey Sauter
+ * @author Tamsen Dean
+ * @author Bryce Manley
+ * @author Bryan Soriano-Salinas
+ * @version Spring 2022
+ */
+
 public class DBView extends View implements Observer {
     protected static final float radius = (float) 0.02;
     protected static final float start = (float) 0.01;
@@ -82,7 +93,15 @@ public class DBView extends View implements Observer {
         float gridSize = DBView.gridSize * pos;
         float dotsPos = DBView.dotsPos * pos;
 
-        //paint lines
+        /**
+         External Citation
+         Date: 22 March, 2022
+         Problem: Trying to draw a grid of squares
+         Resource:
+         https://stackoverflow.com/questions/48724534/trying-to-adapt-an-old-program-to-draw-a-grid-of-squares
+         Solution: Although this person's code had issues, I used their ideas of separator ratios and
+         available space from floor to ceiling in order to draw a 6x6 grid with dots at each intersection.
+         */
         for (int i = 0; i < game.getHeight() + 1; i++) {
             for (int j = 0; j < game.getWidth(); j++) {
                 DBGameState horizontal = new DBGameState(LineDirection.HORIZONTAL, i, j);
@@ -139,6 +158,13 @@ public class DBView extends View implements Observer {
 
     //receives info about motion events-for selecting lines
     private void receiveInput(MotionEvent event) {
+        /**
+         External Citation
+         Date: 22 March, 2022
+         Problem: Clicking on line to create motion event
+         Resource: https://stackoverflow.com/questions/3476779/how-to-get-the-touch-position-in-android/3476840#3476840
+         Solution: I got help from these answers to learn about how to implement motion events in the grid.
+         */
         if (event.getAction() != MotionEvent.ACTION_DOWN)
             return;
 
@@ -185,7 +211,7 @@ public class DBView extends View implements Observer {
             ((DBPlayer) game.currentPlayer()).add(move);
         }
     }
-// to local game
+
     //this updates the local game on who the current player is and if they have won
     @Override
     public void update(Observable observable, Object data) {
