@@ -23,6 +23,12 @@ public class DBLocalGame extends LocalGame {
 	private int[][] horizontal;
 	private int[][] vertical;
 
+	/**
+	 * Ctor of DBLocalGame that holds info about board and players
+	 * @param width - width of grid
+	 * @param height - height of grid
+	 * @param players - players in game
+	 */
 	public DBLocalGame(int width, int height, Player[] players) {
 		this.width = width;
 		this.height = height;
@@ -36,25 +42,34 @@ public class DBLocalGame extends LocalGame {
 		currentPlayer = 0;
 	}
 
-
+	/**
+	 * getter methods of players, width, and height
+	 */
 	public Player[] getPlayers() {
 		return players;
 	}
-
 	public int getWidth() {
 		return width;
 	}
-
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * addPlayers() add the types of players to the game
+	 * @param players - players in game (computer/human)
+	 */
 	private void addPlayers(Player[] players) {
 		for (Player player : players) {
 			player.addToGame(this);
 		}
 	}
 
+	/**
+	 * addMove() checks if box is made after line is placed. If so,
+	 * move again. If not, next player moves.
+	 * @param move - give move to player
+	 */
 	public void addMove(DBGameState move) {
 		if (lineChecked(move)) {
 			return;
@@ -66,14 +81,31 @@ public class DBLocalGame extends LocalGame {
 			nextPlayer();
 	}
 
+	/**
+	 * currentPlayer() return player whose turn it is
+	 * @return currentPlayer
+	 */
 	public Player currentPlayer() {
 		return players[currentPlayer];
 	}
 
+	/**
+	 * lineChecked() sees where line is checked
+	 * @param direction - horizontal/vertical line
+	 * @param row - row of grid
+	 * @param column - column of grid
+	 * @return lineChecked - location of checked line
+	 */
 	public boolean lineChecked(LineDirection direction, int row, int column) {
 		return lineChecked(new DBGameState(direction, row, column));
 	}
-// checks which line is selected and throws an exception if not a valid move
+
+	/**
+	 * lineChecked() checks which line is selected and throws an
+	 * exception if not a valid move
+	 * @param line - line drawn on grid
+	 * @return horizontal or vertical line drawn belongs to certain player
+	 */
 	public boolean lineChecked(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
@@ -85,7 +117,13 @@ public class DBLocalGame extends LocalGame {
 		}
 		throw new IllegalArgumentException(line.direction().toString());
 	}
-// this is a method for the player selecting their chosen line
+
+	/**
+	 * getPlayerLine() method for the player selecting their chosen line
+	 * exception if not a valid move
+	 * @param line - line drawn on grid
+	 * @return horizontal or vertical line drawn belongs to certain player
+	 */
 	public int getPlayerLine(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
@@ -96,12 +134,21 @@ public class DBLocalGame extends LocalGame {
 		throw new IllegalArgumentException(line.direction().toString());
 	}
 
-	//this looks at the who's box it is
+	/**
+	 * getPlayerBox() method sees who won the box
+	 * @param row - row on grid
+	 * @param column - column on grid
+	 * @return checked - box location on grid
+	 */
 	public Player getPlayerBox(int row, int column) {
 		return checked[row][column];
 	}
 
-	// this method looks at how many boxes are claimed by the player
+	/**
+	 * getPlayerBoxCount() method sees how many boxes player has claimed on board
+	 * @param player - which player
+	 * @return count - number of boxes
+	 */
 	public int getPlayerBoxCount(Player player) {
 		int count = 0;
 		for (int i = 0; i < getHeight(); i++) {
@@ -113,7 +160,11 @@ public class DBLocalGame extends LocalGame {
 		return count;
 	}
 
-	// this method checks the box to see if it's finished/ made
+	/**
+	 * checkBox() method checks the box to see if it's formed
+	 * @param move - move that was played on board
+	 * @return which side was checked
+	 */
 	private boolean checkBox(DBGameState move) {
 		boolean rightChecked = checkRightBox(move);
 		boolean underChecked = checkUnderBox(move);
@@ -122,6 +173,10 @@ public class DBLocalGame extends LocalGame {
 		return leftChecked || rightChecked || upperChecked || underChecked;
 	}
 
+	/**
+	 * setLineChecked() method checks if line was placed
+	 * @param line - line that was placed
+	 */
 	private void setLineChecked(DBGameState line) {
 		switch (line.direction()) {
 			case HORIZONTAL:
@@ -133,11 +188,21 @@ public class DBLocalGame extends LocalGame {
 		}
 	}
 
+	/**
+	 * setBoxChecked() method checks who won box
+	 * @param row - see above comments
+	 * @param column
+	 * @param player
+	 */
 	private void setBoxChecked(int row, int column, Player player) {
 		checked[row][column] = player;
 	}
 
-	//check to see if the upper line of the box is selected
+	/**
+	 * checkUpperBox(), checkUnderBox(), checkLeftBox(), checkRightBox methods
+	 * check if box was formed that builds off of previous box
+	 * @param move - move that was made
+	 */
 	private boolean checkUpperBox(DBGameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() <= 0)
 			return false;
@@ -150,7 +215,6 @@ public class DBLocalGame extends LocalGame {
 			return false;
 		}
 	}
-
 	// check to see if the line on the bottom of the box is selected
 	private boolean checkUnderBox(DBGameState move) {
 		if (move.direction() != LineDirection.HORIZONTAL || move.row() >= (height))
@@ -164,7 +228,6 @@ public class DBLocalGame extends LocalGame {
 			return false;
 		}
 	}
-
 	//check if the left line is selected
 	private boolean checkLeftBox(DBGameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() <= 0)
@@ -178,7 +241,6 @@ public class DBLocalGame extends LocalGame {
 			return false;
 		}
 	}
-
 	//check to see if the right line is selected
 	private boolean checkRightBox(DBGameState move) {
 		if (move.direction() != LineDirection.VERTICAL || move.column() >= (width))
@@ -193,13 +255,18 @@ public class DBLocalGame extends LocalGame {
 		}
 	}
 
-	// check to see if its the next players turn
+	/**
+	 * nextPlayer() finds next player that moves
+	 * @return next player
+	 */
 	private void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.length;
 	}
-//move to localGame
 
-	//check to see if game is over
+	/**
+	 * gameOver() checks if game is over
+	 * @return true if all boxes are claimed
+	 */
 	protected boolean gameOver() {
 		for (int i = 0; i < getHeight(); i++) {
 			for (int j = 0; j < getWidth(); j++) {
@@ -209,9 +276,11 @@ public class DBLocalGame extends LocalGame {
 		}
 		return true;
 	}
-//move to localGame
 
-	//check to see which player won
+	/**
+	 * getWinner() finds player that won game
+	 * @return player that won
+	 */
 	public Player getWinner() {
 		if (!gameOver()) {
 			return null;
@@ -228,6 +297,9 @@ public class DBLocalGame extends LocalGame {
 			return players[1];
 	}
 
+	/**
+	 * start() starts and updates game while it is not won
+	 */
 	@Override
 	public void start() {
 		while (!gameOver()) {

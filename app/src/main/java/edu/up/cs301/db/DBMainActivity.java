@@ -44,11 +44,17 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 	Integer[] playerPoints = new Integer[]{0, 0};
 	Player currentPlayer;
 
+	/**
+	 * onCreate() of our main activity game.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		/**
+		 * starts music and sets score values from player names
+		 */
 		mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.song);
 
 		mediaPlayer.start();
@@ -61,6 +67,9 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		player1score = (TextView) findViewById(R.id.player1score);
 		player2score = (TextView) findViewById(R.id.player2score);
 
+		/**
+		 * get id from main menu button: tells us which players are in it
+		 */
 		Bundle b = getIntent().getExtras();
 		int id = b.getInt("id");
 		if (id == 0) {
@@ -117,13 +126,18 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		}
 	}
 
-	//this starts the game
+	/**
+	 * startGame() sets the gameView and continuously updates its state
+	 * @param players - types of players in game
+	 */
 	private void startGame(Player[] players) {
 		gameView.startGame(players);
 		updateState();
 	}
 
-	// this is a thread to update the player score
+	/**
+	 * updateState() a thread to update the player score
+	 */
 	public void updateState() {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -134,14 +148,20 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		});
 	}
 
-	// creates player
+	/**
+	 * setCurrentPlayer() creates player turn and updates state accordingly
+	 * @param player - current player
+	 */
 	@Override
 	public void setCurrentPlayer(Player player) {
 		currentPlayer = player;
 		updateState();
 	}
 
-	// sets the initial score of the players
+	/**
+	 * setScore() sets the score of the players from box count and updates board
+	 * @param playerBoxCount - number of boxes mapped to a player
+	 */
 	@Override
 	public void setScore(Map<Player, Integer> playerBoxCount) {
 		playerPoints[0] = (playerBoxCount.get(players[0]));
@@ -149,7 +169,10 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		updateState();
 	}
 
-	// this is the message window that displays who won and if they wanna play again
+	/**
+	 * setWinner() displays message of who won and if they want to play again
+	 * @param winner - player that won
+	 */
 	@Override
 	public void setWinner(final Player winner) {
 		runOnUiThread(new Runnable() {
@@ -172,14 +195,20 @@ public class DBMainActivity extends AppCompatActivity implements PlayerInfo {
 		});
 	}
 
-	// this is our game menu option
+	/**
+	 * onCreateOptionsMenu() display menu
+	 * @param menu - screen menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.game_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	// this is the menu where we have popup messages displayed
+	/**
+	 * onOptionsItemSelected() gives player options
+	 * @param item - option on menu
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();

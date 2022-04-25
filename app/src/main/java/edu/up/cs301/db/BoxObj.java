@@ -17,7 +17,14 @@ public class BoxObj {
 	boolean right;
 	boolean checked;
 
-	// this is our constructor for the BoxObj class
+	/**
+	 * Ctor of BoxObj creates a box if all sides are checked
+	 * @param t - boolean if top is checked
+	 * @param b - boolean if bottom is checked
+	 * @param l - boolean if left is checked
+	 * @param r - boolean if right is checked
+	 * @return checked - boolean: check if all the above are true
+	 */
 	public BoxObj(boolean t, boolean b, boolean l, boolean r) {
 		this.top = t;
 		this.bottom = b;
@@ -26,14 +33,18 @@ public class BoxObj {
 		this.checked = (l && t && r && b);
 	}
 
-	// getter methods for variables
+	/**
+	 * getter methods for side variables
+	 */
 	public boolean top(){return this.top;}
 	public boolean bottom(){return this.bottom;}
 	public boolean right(){return this.right;}
 	public boolean left(){return this.left;}
 
-	// This is the lineCount method that counts the borders for our squares
-	// and returns the number of the final count
+	/**
+	 * lineCount() counts the borders for our squares
+	 * @return count - returns the number of the final count
+	 */
 	public int lineCount() {
 		int count = 0;
 

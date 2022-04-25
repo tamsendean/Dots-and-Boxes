@@ -43,7 +43,11 @@ public class DBView extends View implements Observer {
     protected Paint paint;
     protected PlayerInfo currentPlayer;
 
-    // this is the constructor for the class
+    /**
+     * Ctor of DBView sets onTouchListener, receives motion events
+     * @param context
+     * @param attributeSet
+     */
     public DBView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
 
@@ -61,11 +65,19 @@ public class DBView extends View implements Observer {
                 getResources().getColor(R.color.colorP2)};
     }
 
-    //sees which player is playing
+    /**
+     * setCurrentPlayer() gets/sets current player
+     * @param currentPlayer - info on current player
+     */
     public void setCurrentPlayer(PlayerInfo currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * startGame() creates new game of width and height with 2 players, adds observer to it
+     * which will update the info automatically
+     * @param players - players in game
+     */
     public void startGame(Player[] players) {
         game = new DBLocalGame(5, 5, players);
         game.addObserver(this);
@@ -78,7 +90,10 @@ public class DBView extends View implements Observer {
         postInvalidate();
     }
 
-    // this is our onDraw method which allows our surface view to be drawn
+    /**
+     * onDraw() allows our surface view to be drawn
+     * @param canvas - game board
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -156,7 +171,10 @@ public class DBView extends View implements Observer {
         invalidate();
     }
 
-    //receives info about motion events-for selecting lines
+    /**
+     * receiveInput() gets input from user clicking board
+     * @param event - MotionEvent of clicking lines
+     */
     private void receiveInput(MotionEvent event) {
         /**
          External Citation
@@ -212,7 +230,11 @@ public class DBView extends View implements Observer {
         }
     }
 
-    //this updates the local game on who the current player is and if they have won
+    /**
+     * update() updates board with score data and if player has won
+     * @param observable - observable object
+     * @param data - data object
+     */
     @Override
     public void update(Observable observable, Object data) {
         currentPlayer.setCurrentPlayer(game.currentPlayer());

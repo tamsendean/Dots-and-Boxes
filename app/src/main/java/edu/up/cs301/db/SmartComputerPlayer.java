@@ -32,7 +32,10 @@ public class SmartComputerPlayer extends Player {
 	protected final ArrayList<DBGameState> bestMoves;
 	protected final ArrayList<DBGameState> badMoves;
 
-	// this is the constructor
+	/**
+	 * Ctor of SmartComputerPLayer requires a name to be created and initializes move lists
+	 * @param name is a string assigned to the player created
+	 */
 	public SmartComputerPlayer(String name) {
 		super(name);
 
@@ -41,7 +44,11 @@ public class SmartComputerPlayer extends Player {
 		badMoves = new ArrayList<>();
 	}
 
-	//looks for the next best move
+	/**
+	 * nextMove() is methods that picks/decides what move will be taken by the player. It will
+	 * return the best line. If there are no bestMoves available, it will pick a random safe move.
+	 * @return DBGameState - the signal that says what has been done
+	 */
 	protected DBGameState nextMove() {
 		if (bestMoves.size() != 0) return getBestLine();
 		if (safeMoves.size() != 0) return getRandomSafeLine();
@@ -49,13 +56,22 @@ public class SmartComputerPlayer extends Player {
 		return getRandomBadLine();
 	}
 
-	// interacts with the DBGameState for the next move
+	/**
+	 * move() initializes the grid to make sure its looking at the correct board. Then it uses
+	 * nextMove() to return this players move choice.
+	 * @return DBGameState - the signal that says what has been done
+	 */
 	public DBGameState move() {
 		initGrid();
 		return nextMove();
 	}
 
-	// grind of different moves to make
+	/**
+	 * initGrid() goes through the entire board to look for all good moves, bad moves, and safe moves and stores
+	 * them into ArrayList to keep track of them. Moves that will be considered the third line in a
+	 * box are considered bad moves. Moves that will be the first in a box, will be considered a
+	 * safe move.
+	 */
 	private void initGrid() {
 		bestMoves.clear();
 		badMoves.clear();
@@ -128,32 +144,67 @@ public class SmartComputerPlayer extends Player {
 		}
 	}
 
-	// return values of checking 
+	/**
+	 * getBox() returns the status of a given box. All 4 sides of the box are checked.
+	 * @param row - int indicating position on the grid
+	 * @param column - int indicating position on the grid
+	 * @return BoxObj - status of a given box
+	 */
 	protected BoxObj getBox(int row, int column) {
 		return new BoxObj(verticalChecked(row, column), horizontalChecked(row, column),
 				verticalChecked(row, column + 1), horizontalChecked(row + 1, column));
 	}
 
+	/**
+	 * horizontalChecked() checks if the given line position is checked horizontally.
+	 * @param row - int indicating position on the grid
+	 * @param column - int indicating position on the grid
+	 * @return boolean - true is the move has been made
+	 */
 	protected boolean horizontalChecked(int row, int column) {
 		return getGame().lineChecked(LineDirection.HORIZONTAL, row, column);
 	}
 
+	/**
+	 * verticalChecked() checks if the given line position is checked vertically.
+	 * @param row - int indicating position on the grid
+	 * @param column - int indicating position on the grid
+	 * @return boolean - true is the move has been made
+	 */
 	protected boolean verticalChecked(int row, int column) {
 		return getGame().lineChecked(LineDirection.VERTICAL, row, column);
 	}
 
+	/**
+	 * getRandomBestLine() picks the first best move from the bestMoves ArrayList.
+	 * @return DBGameState - return what line was selected
+	 */
 	protected DBGameState getBestLine() {
 		return bestMoves.get(0);
 	}
 
+	/**
+	 * getRandomSafeLine() picks a random move from the safeMoves ArrayList.
+	 * @return DBGameState - return what line was selected
+	 */
 	protected DBGameState getRandomSafeLine() {
 		return getRandomLine(safeMoves);
 	}
 
+	/**
+	 * getRandomBadLine() picks a random move from the badMoves ArrayList.
+	 * @return DBGameState - return what line was selected
+	 */
 	protected DBGameState getRandomBadLine() {
 		return getRandomLine(badMoves);
 	}
 
+	/**
+	 * getRandomLine() is a helper method that picks a random item from a given list. This will be
+	 * used to pick random moves to be played.
+	 * @param list - list of moves to choose from
+	 * @return DBGameState - return what line was selected
+	 */
 	private DBGameState getRandomLine(List<DBGameState> list) {
 		return list.get((int) (list.size() * Math.random()));
 	}

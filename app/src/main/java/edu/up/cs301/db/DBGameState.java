@@ -17,26 +17,37 @@ public class DBGameState extends GameState {
     private final int row;
     private final int column;
 
-    // constructor
+    /**
+     * Ctor of DBGameState that holds info of board when line is placed
+     * @param direction - horizontal or vertical line
+     * @param row - row int on board
+     * @param column - column int on board
+     */
     public DBGameState(LineDirection direction, int row, int column) {
         this.direction = direction;
         this.row = row;
         this.column = column;
     }
 
+    /**
+     * getter methods for DBGameState
+     * @return row, column, direction of current gameState
+     */
     public LineDirection direction() {
         return direction;
     }
-
     public int row() {
         return row;
     }
-
     public int column() {
         return column;
     }
 
-    // ensures that the gamestate matches
+    /**
+     * equals() ensures gameState matches
+     * @param o - gameState object
+     * @return row, column, direction to be of new gameState where line is placed
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,6 +58,10 @@ public class DBGameState extends GameState {
         return row == line.row && column == line.column && direction == line.direction;
     }
 
+    /**
+     * toString()
+     * @return concatenation of line direction with its row and column position
+     */
     @Override
     public String toString() {
         return "direction: " + direction().toString() + ", row: " + row + ", column: " + column;

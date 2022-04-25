@@ -24,27 +24,43 @@ public class DumbComputerPlayer extends Player {
      */
     protected final ArrayList<DBGameState> badMoves;
 
+    /**
+     * Ctor of DumbComputerPLayer requires a name to be created and initializes move lists
+     * @param name is a string assigned to the player created
+     */
     public DumbComputerPlayer(String name) {
         super(name);
 
         badMoves = new ArrayList<>();
     }
 
+    /**
+     * nextMove() is methods that picks/decides what move will be taken by the player. It will
+     * return a random bad move.
+     * @return DBGameState - the signal that says what has been done
+     */
     protected DBGameState nextMove() {
         if (badMoves.size() != 0) return getRandomBadLine();
 
         return getRandomBadLine();
     }
 
+    /**
+     * move() initializes the grid to make sure its looking at the correct board. Then it uses
+     * nextMove() to return this players move choice.
+     * @return DBGameState - the signal that says what has been done
+     */
     public DBGameState move() {
         initGrid();
         return nextMove();
     }
 
-    // different cases of potential moves to take
+    /**
+     * initGrid() goes through the entire board to look for all bad moves and stores
+     * them into ArrayList to keep track of them.
+     */
     private void initGrid() {
         badMoves.clear();
-//TODO : change hardcoded values to variable
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 if (!horizontalChecked(i, j)) {
@@ -106,27 +122,51 @@ public class DumbComputerPlayer extends Player {
         }
     }
 
-    //sees if it can win the box at the moment
+    /**
+     * getBox() returns the status of a given box. All 4 sides of the box are checked.
+     * @param row - int indicating position on the grid
+     * @param column - int indicating position on the grid
+     * @return BoxObj - status of a given box
+     */
     protected BoxObj getBox(int row, int column) {
         return new BoxObj(verticalChecked(row, column), horizontalChecked(row, column),
                 verticalChecked(row, column + 1), horizontalChecked(row + 1, column));
     }
 
-    // checks horizontal lines
+    /**
+     * horizontalChecked() checks if the given line position is checked horizontally.
+     * @param row - int indicating position on the grid
+     * @param column - int indicating position on the grid
+     * @return boolean - true is the move has been made
+     */
     protected boolean horizontalChecked(int row, int column) {
         return getGame().lineChecked(LineDirection.HORIZONTAL, row, column);
     }
 
-    // checks vertical lines for boxes
+    /**
+     * verticalChecked() checks if the given line position is checked vertically.
+     * @param row - int indicating position on the grid
+     * @param column - int indicating position on the grid
+     * @return boolean - true is the move has been made
+     */
     protected boolean verticalChecked(int row, int column) {
         return getGame().lineChecked(LineDirection.VERTICAL, row, column);
     }
 
-    // select random bad line
+    /**
+     * getRandomBadLine() picks a random move from the badMoves ArrayList.
+     * @return DBGameState - return what line was selected
+     */
     protected DBGameState getRandomBadLine() {
         return getRandomLine(badMoves);
     }
 
+    /**
+     * getRandomLine() is a helper method that picks a random item from a given list. This will be
+     * used to pick random moves to be played.
+     * @param list - list of moves to choose from
+     * @return DBGameState - return what line was selected
+     */
     private DBGameState getRandomLine(List<DBGameState> list) {
         return list.get((int) (list.size() * Math.random()));
     }

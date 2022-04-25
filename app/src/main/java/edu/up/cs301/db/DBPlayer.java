@@ -16,10 +16,18 @@ import edu.up.cs301.GameFramework.players.Player;
 public class DBPlayer extends Player {
 	private final DBGameState[] gs = new DBGameState[1];
 
+	/**
+	 * Ctor of DBPlayer requires a name to be created and get input
+	 * @param name is a string assigned to the player created
+	 */
 	public DBPlayer(String name) {
 		super(name);
 	}
 
+	/**
+	 * add() notifies observers that line was placed by player
+	 * @param line - line placed in gameState
+	 */
 	public void add(DBGameState line) {
 		synchronized (gs) {
 			gs[0] = line;
@@ -27,6 +35,9 @@ public class DBPlayer extends Player {
 		}
 	}
 
+	/**
+	 * getInput() gets player input, catches exceptions
+	 */
 	private DBGameState getInput() {
 		synchronized (gs) {
 			if (gs[0] != null) {
@@ -43,6 +54,9 @@ public class DBPlayer extends Player {
 		}
 	}
 
+	/**
+	 * move() returns move that was made
+	 */
 	@Override
 	public DBGameState move() {
 		return getInput();
